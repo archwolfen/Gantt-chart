@@ -11,13 +11,14 @@ summary elements constitute the work breakdown structure of the project
 - Anton Vovk - archwolf@protonmail.com
 - Vladislav Manzhula - jay.k0lad@gmail.com
 
-# To do
+# Task includes:
 Implement a JAVA program to read Gantt chart from XML file, present in graphical form and determine the critical path.
 - Design of XML structure;
 - Implement loading data from XML structure;
 - Present in graphical form considering dependences between task
 - Determine and present critical path
-Assumptions of task:
+
+# Assumptions of task:
 - At least 2 parallel paths of project
 - Static presentation of WBS
 - Presentation of references between tasks
