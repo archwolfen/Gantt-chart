@@ -1,2 +1,7 @@
 # Gantt-chart
-yo yo yo mzfkrs
+
+# Team
+Kostia Synytsia - email
+Svyato PatoPotato - email
+Anton Vovk - archwolf@protonmail.com
+Vladislav Manzhula - jay.k0lad@gmail.com
