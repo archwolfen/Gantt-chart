@@ -1,4 +1,4 @@
-package com.example;
+package com.example.gantt_chart;
 
 import org.junit.Assert;
 import org.junit.Test;
