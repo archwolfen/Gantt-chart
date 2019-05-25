@@ -5,6 +5,13 @@
             <start>1558804490</start>
             <end>1559150090</end><!--including-->
         </date>
+        <executors>
+            <executor>
+                <name>Vladyslav</name>
+                <surname>Manzhula</surname>
+                <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+            </executor>
+        </executors>
         <progress>67</progress><!--In %-->
         <next-ids>
             <id>next-node1</id>
@@ -16,6 +23,23 @@
                     <start>1558804490</start>
                     <end>1559150090</end><!--including-->
                 </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
                 <progress>67</progress><!--In %-->
                 <next-ids>
                     <id>next-node1</id>
