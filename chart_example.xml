@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<char-data>
+<chart-data>
     <activity title="Activity Name" id="some_id">
         <date>
             <start>1558804490</start>
@@ -24,4 +24,4 @@
             </activity>
         </sub-activities>
     </activity>
-</char-data>
+</chart-data>
