@@ -8,8 +8,14 @@ import java.util.ArrayList;
 
 public class ActivityList implements Convertible {
 
-    private ArrayList<Activity> allActivities;
+    private ArrayList<Activity> allActivities = new ArrayList<Activity>();
 
+    public ActivityList() {
+    }
+
+    public void addActivity(Activity activity) {
+
+    }
 
     public Dates calculateCriticalPath() {
         return null;
