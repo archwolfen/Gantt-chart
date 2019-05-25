@@ -5,7 +5,7 @@
             <start>1558804490</start>
             <end>1559150090</end><!--including-->
         </date>
-        <progress>67</progress><!--In %-->
+        <progress>67</progress><!--In %-->  tojson -> {"progress":67}
         <next-ids>
             <id>next-node1</id>
             <id>next-node2</id>
@@ -21,7 +21,6 @@
                     <id>next-node1</id>
                     <id>next-node2</id>
                 </next-ids>
-                <!--without sub activities, but may be present-->
             </activity>
         </sub-activities>
     </activity>
