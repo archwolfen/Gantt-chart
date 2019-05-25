@@ -1,0 +1,27 @@
+<char-data>
+    <activity title="Activity Name" id="some_id">
+        <date>
+            <start>1558804490</start>
+            <end>1559150090</end><!--including-->
+        </date>
+        <progress>67</progress><!--In %-->
+        <next-ids>
+            <id>next-node1</id>
+            <id>next-node2</id>
+        </next-ids>
+        <sub-activities>
+            <activity title="Sub-activity Name" id="some_id">
+                <date>
+                    <start>1558804490</start>
+                    <end>1559150090</end><!--including-->
+                </date>
+                <progress>67</progress><!--In %-->
+                <next-ids>
+                    <id>next-node1</id>
+                    <id>next-node2</id>
+                </next-ids>
+                <!--without sub activities, but may be present-->
+            </activity>
+        </sub-activities>
+    </activity>
+</char-data>
