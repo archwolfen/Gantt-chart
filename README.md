@@ -26,4 +26,4 @@ Implement a JAVA program to read Gantt chart from XML file, present in graphical
   - Java 8
   - Maven/Gradle build automation tool
   - JUnit for unit testsing is a plus
-  - data visualisation is up to a team (SWING, JavaFX, Web App – Angular, JSF,JSP)
+  - data visualisation using Angular
