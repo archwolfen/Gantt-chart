@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-public class Subactivities implements Convertible {
+public class SubActivities implements Convertible {
     private ArrayList<Activity> activities = new ArrayList<Activity>();
 
     public void addActivity(Activity activity) {
