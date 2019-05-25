@@ -6,7 +6,7 @@ finish dates of the terminal elements and summary elements of a project. Termina
 summary elements constitute the work breakdown structure of the project
 
 # Team
-- Kostia Synytsia - email
+- Kostia Synytsia - kostiantyn.synytsia@gmail.com
 - Svyato PatoPotato - svyatopato@gmail.com
 - Anton Vovk - archwolf@protonmail.com
 - Vladislav Manzhula - jay.k0lad@gmail.com
