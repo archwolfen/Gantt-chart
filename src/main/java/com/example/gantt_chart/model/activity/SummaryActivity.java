@@ -2,6 +2,7 @@ package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 public class SummaryActivity extends TerminalActivity implements Convertible {
     private SubActivities subactivities = new SubActivities();
@@ -10,9 +11,8 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
 
     }
 
-    public SummaryActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors, SubActivities subactivities) {
-        super(startFinal, progress, nextIds, executors);
-        this.subactivities = subactivities;
+    public SummaryActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors, String title, String id) {
+        super(startFinal, progress, nextIds, executors, title, id);
     }
 
     public void addSubActivity(TerminalActivity activity) {
@@ -25,6 +25,10 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
 
     @Override
     public JsonElement toJson() {
-        return super.toJson();
+        JsonElement jsonElement = super.toJson();
+        JsonElement subJson = subactivities.toJson();
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        jsonObject.add("sub-activities", subJson);
+        return jsonObject;
     }
 }
