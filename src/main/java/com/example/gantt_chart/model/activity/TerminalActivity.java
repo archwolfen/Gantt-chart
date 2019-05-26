@@ -5,19 +5,21 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class TerminalActivity implements Convertible {
+    private String title;
     private Dates startFinal;
+    private ExecutorList executors;
     private Progress progress;
     private Ids nextIds;
-    private ExecutorList executors;
 
     public TerminalActivity() {
     }
 
-    public TerminalActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors) {
+    public TerminalActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors, String title) {
         this.startFinal = startFinal;
         this.progress = progress;
         this.nextIds = nextIds;
         this.executors = executors;
+        this.title = title;
     }
 
     public Dates getStartFinal() {
@@ -52,8 +54,21 @@ public class TerminalActivity implements Convertible {
         this.nextIds = nextIds;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public JsonElement toJson() {
-        //TODO implment in next Commit
-        return null;
+        JsonObject activity = new JsonObject();
+        activity.addProperty("title", title);
+        activity.add("date", startFinal.toJson());
+        activity.add("executors", executors.toJson());
+        activity.add("progress", progress.toJson());
+        activity.add("next-ids", nextIds.toJson());
+        return activity;
     }
 }
