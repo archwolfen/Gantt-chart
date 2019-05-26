@@ -10,7 +10,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Parser {
 
@@ -43,30 +46,43 @@ public class Parser {
     }
 
     //for single activity
-    private Activity parse(Node node) throws InvalidNameException, ClassCastException {
+    private Activity parse(Node node)
+            throws InvalidNameException, ClassCastException, URISyntaxException {
 
         Activity task;
 
         ArrayList<Node> dataList = getElementNodes(node.getChildNodes());
 
-        if(hasElement("sub-activities", dataList))
+        if(getIndexOfElement("sub-activities", dataList) > -1)
             task = new SummaryActivity();
         else
             task = new TerminalActivity();
 
         for(Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
+
                 task.setStartFinal(getDates(currData));
+
             } else if (currData.getNodeName().equals("executors")) {
+
                 task.setExecutors(getExecutorList(currData));
+
             } else if (currData.getNodeName().equals("progress")) {
+
                 task.setProgress(getProgress(currData));
+
             } else if (currData.getNodeName().equals("next-ids")) {
+
                 task.setNextIds(getIdList(currData));
+
             } else if (currData.getNodeName().equals("sub-activities")) {
+
                 ((SummaryActivity)task).addActivity(getSubActivities(currData));
+
             } else {
+
                 throw new InvalidNameException("Unexpected node name: " + currData.getNodeName());
+
             }
         }
 
@@ -74,35 +90,77 @@ public class Parser {
     }
 
     private Dates getDates(Node node) {
-        System.out.println("\t" + node.getTextContent());
-        return null;
+        ArrayList<Node> dates = getElementNodes(node.getChildNodes());
+
+        String start = getTextValue(dates.get(getIndexOfElement("start", dates)));
+        Date startDate = new Date(Long.parseLong(start));
+
+        String end = getTextValue(dates.get(getIndexOfElement("end", dates)));
+        Date endDate = new Date(Long.parseLong(end));
+
+        return new Dates(startDate, endDate);
     }
 
-    private ExecutorList getExecutorList(Node node) {
-        System.out.println("\t" + node.getTextContent());
-        return null;
+    private ExecutorList getExecutorList(Node node) throws URISyntaxException {
+
+        ArrayList<Node> executors = getElementNodes(node.getChildNodes());
+
+        ExecutorList executorList = new ExecutorList();
+
+        for(Node executor : executors)
+        {
+            executorList.addExecutor(getExecutor(executor));
+        }
+
+        return executorList;
+    }
+
+    private Executor getExecutor(Node node) throws URISyntaxException {
+
+        ArrayList<Node> dates = getElementNodes(node.getChildNodes());
+
+        String executorName = getTextValue(dates.get(getIndexOfElement("name", dates)));
+        String executorSurname = getTextValue(dates.get(getIndexOfElement("surname", dates)));
+
+        NamedNodeMap attributeList = dates.get(getIndexOfElement("photo", dates)).getAttributes();
+        String photoURI = attributeList.getNamedItem("src").getNodeValue();
+
+        return new Executor(executorName, executorSurname, new URI(photoURI));
     }
 
     private Progress getProgress(Node node) {
-        System.out.println("\t" + node.getTextContent());
-        return null;
+        String progress = getTextValue(node);
+
+        return new Progress(Integer.parseInt(progress));
     }
 
     private Ids getIdList(Node node) {
-        System.out.println("\t" + node.getTextContent());
-        return null;
+        ArrayList<Node> ids = getElementNodes(node.getChildNodes());
+
+        Ids idList = new Ids();
+
+        for (Node id : ids)
+        {
+            String newID = getTextValue(id);
+
+            idList.addId(Integer.parseInt(newID));
+        }
+
+        return idList;
     }
 
-    private SubActivities getSubActivities(Node node) throws InvalidNameException, ClassCastException {
-        System.out.println("{");
+    private SubActivities getSubActivities(Node node)
+            throws InvalidNameException, ClassCastException, URISyntaxException {
         ArrayList<Node> activityList = getElementNodes(node.getChildNodes());
+
+        SubActivities subActivities = new SubActivities();
 
         for(Node currActivity : activityList)
         {
-            Activity task = parse(currActivity);
+            subActivities.addActivity(parse(currActivity));
         }
-        System.out.println("}");
-        return null;
+
+        return subActivities;
     }
 
     // TODO: 26.05.2019 Utilities
@@ -124,16 +182,20 @@ public class Parser {
         return nodeList;
     }
 
-    private boolean hasElement(String elem, ArrayList<Node> dataList)
+    private int getIndexOfElement(String elem, ArrayList<Node> dataList)
     {
         // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
-        for (Node currData : dataList)
+        for (int i = 0; i < dataList.size(); i++)
         {
-            if (currData.getNodeName().equals(elem)) {
-                return true;
+            if (dataList.get(i).getNodeName().equals(elem)) {
+                return i;
             }
         }
 
-        return false;
+        return -1;
+    }
+
+    private String getTextValue(Node node) {
+        return node.getFirstChild().getNodeValue();
     }
 }
