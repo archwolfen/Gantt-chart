@@ -14,6 +14,11 @@ public abstract class Activity implements Convertible {
         this.nextIds = nexIds;
     }
 
+    public Activity()
+    {
+
+    }
+
     public Dates getStartFinal() {
         return startFinal;
     }

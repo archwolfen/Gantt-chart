@@ -9,6 +9,10 @@ public class SummaryActivity extends Activity {
         super(startFinal, progress, nextIds);
     }
 
+    public SummaryActivity(Dates startFinal, Progress progress, Ids nextIds, SubActivities subActivities) {
+        super(startFinal, progress, nextIds);
+    }
+
     public void addActivity(Activity activity) {
 
     }
