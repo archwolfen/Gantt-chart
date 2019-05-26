@@ -1,7 +1,7 @@
 package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.model.Convertible;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 public class Executor implements Convertible {
     private String name;
@@ -43,7 +43,7 @@ public class Executor implements Convertible {
         this.photoUrl = photoUrl;
     }
 
-    public JsonObject toJson() {
+    public JsonElement toJson() {
         return null;
     }
 }

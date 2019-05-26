@@ -2,7 +2,7 @@ package com.example.gantt_chart.model;
 
 import com.example.gantt_chart.model.activity.Activity;
 import com.example.gantt_chart.model.activity.Dates;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class ActivityList implements Convertible {
         return null;
     }
 
-    public JsonObject toJson() {
+    public JsonElement toJson() {
         return null;
     }
 }

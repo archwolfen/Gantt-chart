@@ -1,7 +1,7 @@
 package com.example.gantt_chart.model;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 public interface Convertible {
-    JsonObject toJson();
+    JsonElement toJson();
 }

@@ -1,17 +1,17 @@
 package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.model.Convertible;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 public abstract class Activity implements Convertible {
     private Dates startFinal;
     private Progress progress;
-    private Ids nexIds;
+    private Ids nextIds;
 
     public Activity(Dates startFinal, Progress progress, Ids nexIds) {
         this.startFinal = startFinal;
         this.progress = progress;
-        this.nexIds = nexIds;
+        this.nextIds = nexIds;
     }
 
     public Dates getStartFinal() {
@@ -30,15 +30,15 @@ public abstract class Activity implements Convertible {
         this.progress = progress;
     }
 
-    public Ids getNexIds() {
-        return nexIds;
+    public Ids getNextIds() {
+        return nextIds;
     }
 
-    public void setNexIds(Ids nexIds) {
-        this.nexIds = nexIds;
+    public void setNextIds(Ids nextIds) {
+        this.nextIds = nextIds;
     }
 
-    public JsonObject toJson() {
+    public JsonElement toJson() {
         return null;
     }
 }
