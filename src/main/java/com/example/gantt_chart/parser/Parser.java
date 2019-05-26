@@ -26,7 +26,7 @@ public class Parser {
 
     public ActivityList parse() throws Exception {
 
-        ActivityList resultList = new ActivityList();
+        ActivityList taskList = new ActivityList();
 
         // Получаем корневой элемент
         root = document.getDocumentElement();
@@ -35,10 +35,10 @@ public class Parser {
 
         for(Node currActivity : activityList)
         {
-            resultList.addActivity(parse(currActivity));
+            taskList.addActivity(parse(currActivity));
         }
 
-        return resultList;
+        return taskList;
     }
 
     //for single activity
@@ -69,7 +69,7 @@ public class Parser {
             }
         }
 
-        return null;
+        return task;
     }
 
     private Dates getDates(Node node) {
@@ -103,6 +103,8 @@ public class Parser {
         System.out.println("}");
         return null;
     }
+
+    // TODO: 26.05.2019 Utilities
 
     private ArrayList<Node> getElementNodes(NodeList list) {
 
