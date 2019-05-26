@@ -21,6 +21,6 @@ public class Progress implements Convertible {
     }
 
     public JsonElement toJson() {
-        return  new JsonPrimitive(percents);
+        return new JsonPrimitive(percents);
     }
 }

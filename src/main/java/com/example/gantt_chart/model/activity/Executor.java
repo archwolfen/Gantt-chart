@@ -2,6 +2,7 @@ package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.net.URI;
 
@@ -46,6 +47,10 @@ public class Executor implements Convertible {
     }
 
     public JsonElement toJson() {
-        return null;
+        JsonObject executor = new JsonObject();
+        executor.addProperty("name", name);
+        executor.addProperty("surname", surname);
+        executor.addProperty("img-src", photoUrl.toString());
+        return executor;
     }
 }
