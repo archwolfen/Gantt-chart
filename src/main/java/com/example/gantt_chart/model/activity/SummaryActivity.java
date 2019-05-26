@@ -15,7 +15,7 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
         this.subactivities = subactivities;
     }
 
-    public void addSubActivitiy(TerminalActivity activity) {
+    public void addSubActivity(TerminalActivity activity) {
         subactivities.addActivity(activity);
     }
 
