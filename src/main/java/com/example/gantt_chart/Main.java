@@ -7,7 +7,7 @@ public class Main {
         System.out.println("started...");
 
         try {
-            new Parser("chart_example.xml");
+            new Parser("chart_example.xml").parse();
         } catch (Exception e)
         {
             e.printStackTrace();
