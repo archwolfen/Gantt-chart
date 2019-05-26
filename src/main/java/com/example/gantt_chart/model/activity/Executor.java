@@ -11,10 +11,6 @@ public class Executor implements Convertible {
     private String surname;
     private URI photoUrl;
 
-    public String getName() {
-        return name;
-    }
-
     public Executor(String name, String surname) {
         this.name = name;
         this.surname = surname;
@@ -24,6 +20,10 @@ public class Executor implements Convertible {
         this.name = name;
         this.surname = surname;
         this.photoUrl = photoUrl;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
