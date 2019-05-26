@@ -16,6 +16,10 @@ public class Dates implements Convertible {
         this.end = end;
     }
 
+    public Dates(long timestampStart, long timestampEnd) {
+        this(new Date(timestampStart), new Date(timestampEnd));
+    }
+
     public Date getStart() {
         return start;
     }
@@ -36,7 +40,13 @@ public class Dates implements Convertible {
         JsonObject result = new JsonObject();
         result.addProperty("start-date", new SimpleDateFormat("dd-MM-yyyy").format(start));
         result.addProperty("end-date", new SimpleDateFormat("dd-MM-yyyy").format(end));
-        result.addProperty("duration", (int) (end.getTime() - start.getTime()) / 24 * 60 * 60 * 1000);
+        result.addProperty("duration", (int) (end.getTime() - start.getTime()) / (24 * 60 * 60 * 1000) + 1);
         return result;
+    }
+
+    private void checkDateCorrection() {
+        if (start.compareTo(end) > 0) {
+            throw new IllegalArgumentException("The start date has to be earlier than the end date");
+        }
     }
 }
