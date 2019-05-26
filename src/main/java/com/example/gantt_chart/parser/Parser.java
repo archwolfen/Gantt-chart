@@ -39,6 +39,37 @@ public class Parser {
         return null;
     }
 
+    //for single activity
+    private Activity parse(Node node) throws Exception {
+
+        Activity task;
+
+        ArrayList<Node> dataList = getElementNodes(node.getChildNodes());
+
+        if(hasElement("sub-activities", dataList))
+            task = new SummaryActivity();
+        else
+            task = new TerminalActivity();
+
+        for(Node currData : dataList) {
+            if (currData.getNodeName().equals("date")) {
+                Dates date = getDates(currData);
+            } else if (currData.getNodeName().equals("executors")) {
+                ExecutorList executorList = getExecutorList(currData);
+            } else if (currData.getNodeName().equals("progress")) {
+                Progress progress = getProgress(currData);
+            } else if (currData.getNodeName().equals("next-ids")) {
+                Ids idList = getIdList(currData);
+            } else if (currData.getNodeName().equals("sub-activities")) {
+                SubActivities subActivities = getSubActivities(currData);
+            } else {
+                throw new Exception("Unexpected node name: " + currData.getNodeName());
+            }
+        }
+
+        return null;
+    }
+
     private Dates getDates(Node node) {
         System.out.println("\t" + node.getTextContent());
         return null;
@@ -71,31 +102,6 @@ public class Parser {
         return null;
     }
 
-    private Activity parse(Node node) throws Exception {
-
-        Activity task;
-
-        ArrayList<Node> dataList = getElementNodes(node.getChildNodes());
-
-        for(Node currData : dataList) {
-            if (currData.getNodeName().equals("date")) {
-                Dates date = getDates(currData);
-            } else if (currData.getNodeName().equals("executors")) {
-                ExecutorList executorList = getExecutorList(currData);
-            } else if (currData.getNodeName().equals("progress")) {
-                Progress progress = getProgress(currData);
-            } else if (currData.getNodeName().equals("next-ids")) {
-                Ids idList = getIdList(currData);
-            } else if (currData.getNodeName().equals("sub-activities")) {
-                SubActivities subActivities = getSubActivities(currData);
-            } else {
-                throw new Exception("Unexpected node name: " + currData.getNodeName());
-            }
-        }
-
-        return null;
-    }
-
     private ArrayList<Node> getElementNodes(NodeList list) {
 
         ArrayList<Node> nodeList = new ArrayList<Node>();
@@ -111,5 +117,18 @@ public class Parser {
         }
 
         return nodeList;
+    }
+
+    private boolean hasElement(String elem, ArrayList<Node> dataList)
+    {
+        // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
+        for (Node currData : dataList)
+        {
+            if (currData.getNodeName().equals(elem)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
