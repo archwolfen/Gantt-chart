@@ -42,8 +42,8 @@
                 </executors>
                 <progress>67</progress><!--In %-->
                 <next-ids>
-                    <id>next-node1</id>
-                    <id>next-node2</id>
+                    <id>23</id>
+                    <id>23</id>
                 </next-ids>
             </activity>
         </sub-activities>
