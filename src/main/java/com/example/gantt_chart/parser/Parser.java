@@ -26,6 +26,8 @@ public class Parser {
 
     public ActivityList parse() throws Exception {
 
+        ActivityList resultList = new ActivityList();
+
         // Получаем корневой элемент
         root = document.getDocumentElement();
 
@@ -33,10 +35,10 @@ public class Parser {
 
         for(Node currActivity : activityList)
         {
-            Activity task = parse(currActivity);
+            resultList.addActivity(parse(currActivity));
         }
 
-        return null;
+        return resultList;
     }
 
     //for single activity
