@@ -34,9 +34,10 @@ public class Parser {
         // Получаем корневой элемент
         Node root = document.getDocumentElement();
 
-        ArrayList<Node> activityList = getElementNodes(root.getChildNodes());
+        NodesArrayList activityList = new NodesArrayList(root.getChildNodes());
 
-        for (Node currActivity : activityList) {
+        for(Node currActivity : activityList)
+        {
             taskList.addActivity(parse(currActivity));
         }
 
@@ -49,14 +50,14 @@ public class Parser {
 
         TerminalActivity task;
 
-        ArrayList<Node> dataList = getElementNodes(node.getChildNodes());
+        NodesArrayList dataList = new NodesArrayList(node.getChildNodes());
 
-        if (getIndexOfElement("sub-activities", dataList) > -1)
+        if(dataList.hasElement("sub-activities"))
             task = new SummaryActivity();
         else
             task = new TerminalActivity();
 
-        for (Node currData : dataList) {
+        for(Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
 
                 task.setStartFinal(getDates(currData));
@@ -75,7 +76,7 @@ public class Parser {
 
             } else if (currData.getNodeName().equals("sub-activities")) {
 
-                ((SummaryActivity) task).addSubActivities(getSubActivities(currData));
+                ((SummaryActivity)task).addSubActivities(getSubActivities(currData));
 
             } else {
 
@@ -88,12 +89,12 @@ public class Parser {
     }
 
     private Dates getDates(Node node) {
-        ArrayList<Node> dates = getElementNodes(node.getChildNodes());
+        NodesArrayList dates = new NodesArrayList(node.getChildNodes());
 
-        String start = getTextValue(dates.get(getIndexOfElement("start", dates)));
+        String start = getTextValue(dates.get(dates.indexOfElement("start")));
         Date startDate = new Date(Long.parseLong(start));
 
-        String end = getTextValue(dates.get(getIndexOfElement("end", dates)));
+        String end = getTextValue(dates.get(dates.indexOfElement("end")));
         Date endDate = new Date(Long.parseLong(end));
 
         return new Dates(startDate, endDate);
@@ -101,11 +102,12 @@ public class Parser {
 
     private ExecutorList getExecutorList(Node node) throws URISyntaxException {
 
-        ArrayList<Node> executors = getElementNodes(node.getChildNodes());
+        NodesArrayList executors = new NodesArrayList(node.getChildNodes());
 
         ExecutorList executorList = new ExecutorList();
 
-        for (Node executor : executors) {
+        for(Node executor : executors)
+        {
             executorList.addExecutor(getExecutor(executor));
         }
 
@@ -114,12 +116,12 @@ public class Parser {
 
     private Executor getExecutor(Node node) throws URISyntaxException {
 
-        ArrayList<Node> dates = getElementNodes(node.getChildNodes());
+        NodesArrayList dates = new NodesArrayList(node.getChildNodes());
 
-        String executorName = getTextValue(dates.get(getIndexOfElement("name", dates)));
-        String executorSurname = getTextValue(dates.get(getIndexOfElement("surname", dates)));
+        String executorName = getTextValue(dates.get(dates.indexOfElement("name")));
+        String executorSurname = getTextValue(dates.get(dates.indexOfElement("surname")));
 
-        NamedNodeMap attributeList = dates.get(getIndexOfElement("photo", dates)).getAttributes();
+        NamedNodeMap attributeList = dates.get(dates.indexOfElement("photo")).getAttributes();
         String photoURI = attributeList.getNamedItem("src").getNodeValue();
 
         return new Executor(executorName, executorSurname, new URI(photoURI));
@@ -132,11 +134,12 @@ public class Parser {
     }
 
     private Ids getIdList(Node node) {
-        ArrayList<Node> ids = getElementNodes(node.getChildNodes());
+        NodesArrayList ids = new NodesArrayList(node.getChildNodes());
 
         Ids idList = new Ids();
 
-        for (Node id : ids) {
+        for (Node id : ids)
+        {
             String newID = getTextValue(id);
 
             idList.addId(Integer.parseInt(newID));
@@ -147,47 +150,53 @@ public class Parser {
 
     private SubActivities getSubActivities(Node node)
             throws InvalidNameException, ClassCastException, URISyntaxException {
-        ArrayList<Node> activityList = getElementNodes(node.getChildNodes());
+        NodesArrayList activityList = new NodesArrayList(node.getChildNodes());
 
         SubActivities subActivities = new SubActivities();
 
-        for (Node currActivity : activityList) {
+        for(Node currActivity : activityList)
+        {
             subActivities.addActivity(parse(currActivity));
         }
 
         return subActivities;
     }
 
-    // TODO: 26.05.2019 Utilities
-
-    private ArrayList<Node> getElementNodes(NodeList list) {
-
-        ArrayList<Node> nodeList = new ArrayList<Node>();
-
-        // TODO: 26.05.2019 NodeList iterable
-
-        for (int i = 0; i < list.getLength(); i++) {
-            Node currNode = list.item(i);
-            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
-                nodeList.add(list.item(i));
-            }
-        }
-
-        return nodeList;
-    }
-
-    private int getIndexOfElement(String elem, ArrayList<Node> dataList) {
-        // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
-        for (int i = 0; i < dataList.size(); i++) {
-            if (dataList.get(i).getNodeName().equals(elem)) {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
     private String getTextValue(Node node) {
         return node.getFirstChild().getNodeValue();
     }
+
+//    // TODO: 26.05.2019 Utilities
+//
+//    private ArrayList<Node> getElementNodes(NodeList list) {
+//
+//        ArrayList<Node> nodeList = new ArrayList<Node>();
+//
+//        // TODO: 26.05.2019 NodeList iterable
+//
+//        for(int i = 0; i < list.getLength(); i++)
+//        {
+//            Node currNode = list.item(i);
+//            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
+//                nodeList.add(list.item(i));
+//            }
+//        }
+//
+//        return nodeList;
+//    }
+//
+//    // return index of node with name "elem", in case this node does not exists return -1
+//
+//    private int getIndexOfElement(String elem, ArrayList<Node> dataList)
+//    {
+//        // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
+//        for (int i = 0; i < dataList.size(); i++)
+//        {
+//            if (dataList.get(i).getNodeName().equals(elem)) {
+//                return i;
+//            }
+//        }
+//
+//        return -1;
+//    }
 }
