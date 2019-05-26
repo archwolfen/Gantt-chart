@@ -16,6 +16,10 @@ public class Dates implements Convertible {
         this.end = end;
     }
 
+    public Dates(long timestampStart, long timestampEnd) {
+        this(new Date(timestampStart), new Date(timestampEnd));
+    }
+
     public Date getStart() {
         return start;
     }
@@ -36,7 +40,8 @@ public class Dates implements Convertible {
         JsonObject result = new JsonObject();
         result.addProperty("start-date", start.toString());
         result.addProperty("end-date", end.toString());
-        result.addProperty("duration", (int)(end.getTime() - start.getTime()) / 24 * 60 * 60 * 1000);
+        //duration + 1 because of including end date
+        result.addProperty("duration", (int)(end.getTime() - start.getTime()) / (24 * 60 * 60 * 1000) + 1);
         return result;
     }
 }
