@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chart-data>
     <activity title="Activity Name" id="123">
+        <id>some_id</id>
         <date>
             <start>1558804490</start>
             <end>1559150090</end><!--including-->
@@ -19,6 +20,7 @@
         </next-ids>
         <sub-activities>
             <activity title="Sub-activity Name" id="53">
+                <id>some_id</id>
                 <date>
                     <start>1558804490</start>
                     <end>1559150090</end><!--including-->
