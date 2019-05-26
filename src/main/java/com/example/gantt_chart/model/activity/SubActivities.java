@@ -6,10 +6,14 @@ import com.google.gson.JsonElement;
 import java.util.ArrayList;
 
 public class SubActivities implements Convertible {
-    private ArrayList<Activity> activities = new ArrayList<Activity>();
+    private ArrayList<TerminalActivity> activities = new ArrayList<TerminalActivity>();
 
-    public void addActivity(Activity activity) {
+    public void addActivity(TerminalActivity activity) {
+        activities.add(activity);
+    }
 
+    public ArrayList<TerminalActivity> getActivities() {
+        return activities;
     }
 
     public JsonElement toJson() {

@@ -15,8 +15,7 @@ public class Ids implements Convertible {
 
     public JsonElement toJson() {
         JsonArray result = new JsonArray();
-        for(Integer id : ids)
-        {
+        for (Integer id : ids) {
             result.add(id);
         }
         return result;

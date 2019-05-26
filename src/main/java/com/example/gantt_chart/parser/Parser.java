@@ -36,8 +36,7 @@ public class Parser {
 
         ArrayList<Node> activityList = getElementNodes(root.getChildNodes());
 
-        for(Node currActivity : activityList)
-        {
+        for (Node currActivity : activityList) {
             taskList.addActivity(parse(currActivity));
         }
 
@@ -45,19 +44,19 @@ public class Parser {
     }
 
     //for single activity
-    private Activity parse(Node node)
+    private TerminalActivity parse(Node node)
             throws InvalidNameException, ClassCastException, URISyntaxException {
 
-        Activity task;
+        TerminalActivity task;
 
         ArrayList<Node> dataList = getElementNodes(node.getChildNodes());
 
-        if(getIndexOfElement("sub-activities", dataList) > -1)
+        if (getIndexOfElement("sub-activities", dataList) > -1)
             task = new SummaryActivity();
         else
             task = new TerminalActivity();
 
-        for(Node currData : dataList) {
+        for (Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
 
                 task.setStartFinal(getDates(currData));
@@ -76,7 +75,7 @@ public class Parser {
 
             } else if (currData.getNodeName().equals("sub-activities")) {
 
-                ((SummaryActivity)task).addActivity(getSubActivities(currData));
+                ((SummaryActivity) task).addSubActivities(getSubActivities(currData));
 
             } else {
 
@@ -106,8 +105,7 @@ public class Parser {
 
         ExecutorList executorList = new ExecutorList();
 
-        for(Node executor : executors)
-        {
+        for (Node executor : executors) {
             executorList.addExecutor(getExecutor(executor));
         }
 
@@ -138,8 +136,7 @@ public class Parser {
 
         Ids idList = new Ids();
 
-        for (Node id : ids)
-        {
+        for (Node id : ids) {
             String newID = getTextValue(id);
 
             idList.addId(Integer.parseInt(newID));
@@ -154,8 +151,7 @@ public class Parser {
 
         SubActivities subActivities = new SubActivities();
 
-        for(Node currActivity : activityList)
-        {
+        for (Node currActivity : activityList) {
             subActivities.addActivity(parse(currActivity));
         }
 
@@ -170,8 +166,7 @@ public class Parser {
 
         // TODO: 26.05.2019 NodeList iterable
 
-        for(int i = 0; i < list.getLength(); i++)
-        {
+        for (int i = 0; i < list.getLength(); i++) {
             Node currNode = list.item(i);
             if (currNode.getNodeType() == Node.ELEMENT_NODE) {
                 nodeList.add(list.item(i));
@@ -181,11 +176,9 @@ public class Parser {
         return nodeList;
     }
 
-    private int getIndexOfElement(String elem, ArrayList<Node> dataList)
-    {
+    private int getIndexOfElement(String elem, ArrayList<Node> dataList) {
         // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
-        for (int i = 0; i < dataList.size(); i++)
-        {
+        for (int i = 0; i < dataList.size(); i++) {
             if (dataList.get(i).getNodeName().equals(elem)) {
                 return i;
             }

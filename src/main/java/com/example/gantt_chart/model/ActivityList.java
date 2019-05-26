@@ -1,19 +1,19 @@
 package com.example.gantt_chart.model;
 
-import com.example.gantt_chart.model.activity.Activity;
 import com.example.gantt_chart.model.activity.Dates;
+import com.example.gantt_chart.model.activity.TerminalActivity;
 import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 
 public class ActivityList implements Convertible {
 
-    private ArrayList<Activity> allActivities = new ArrayList<Activity>();
+    private ArrayList<TerminalActivity> allActivities = new ArrayList<TerminalActivity>();
 
     public ActivityList() {
     }
 
-    public void addActivity(Activity activity) {
+    public void addActivity(TerminalActivity activity) {
 
     }
 
