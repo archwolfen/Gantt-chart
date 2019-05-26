@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+.list-activities {
+  width: 20%;
+}
+
+.canvas-part {
+  width: 100%;
+}
