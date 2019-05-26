@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 
 public class TerminalActivity implements Convertible {
     private String title;
-    private String id;
+    private Integer id;
     private Dates startFinal;
     private ExecutorList executors;
     private Progress progress;
@@ -15,7 +15,7 @@ public class TerminalActivity implements Convertible {
     public TerminalActivity() {
     }
 
-    public TerminalActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors, String title, String id) {
+    public TerminalActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors, String title, Integer id) {
         this.startFinal = startFinal;
         this.progress = progress;
         this.nextIds = nextIds;
@@ -64,11 +64,11 @@ public class TerminalActivity implements Convertible {
         this.title = title;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
