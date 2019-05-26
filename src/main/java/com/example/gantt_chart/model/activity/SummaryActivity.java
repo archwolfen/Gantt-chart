@@ -5,6 +5,10 @@ import com.google.gson.JsonElement;
 public class SummaryActivity extends Activity {
     private SubActivities subactivities = new SubActivities();
 
+    public SummaryActivity() {
+
+    }
+
     public SummaryActivity(Dates startFinal, Progress progress, Ids nextIds) {
         super(startFinal, progress, nextIds);
     }
