@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ExecutorList implements Convertible {
     private ArrayList<Executor> executors = new ArrayList<Executor>();
 
-    public void addExecutor() {
+    public void addExecutor(Executor executor) {
 
     }
 
