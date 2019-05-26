@@ -18,7 +18,6 @@ import java.util.Date;
 public class Parser {
 
     private Document document;
-    private Node root;
 
     public Parser(String pathToXml)
             throws ParserConfigurationException, IOException, SAXException {
@@ -33,7 +32,7 @@ public class Parser {
         ActivityList taskList = new ActivityList();
 
         // Получаем корневой элемент
-        root = document.getDocumentElement();
+        Node root = document.getDocumentElement();
 
         ArrayList<Node> activityList = getElementNodes(root.getChildNodes());
 
