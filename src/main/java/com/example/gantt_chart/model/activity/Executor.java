@@ -3,10 +3,12 @@ package com.example.gantt_chart.model.activity;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
 
+import java.net.URI;
+
 public class Executor implements Convertible {
     private String name;
     private String surname;
-    private String photoUrl;
+    private URI photoUrl;
 
     public String getName() {
         return name;
@@ -17,7 +19,7 @@ public class Executor implements Convertible {
         this.surname = surname;
     }
 
-    public Executor(String name, String surname, String photoUrl) {
+    public Executor(String name, String surname, URI photoUrl) {
         this.name = name;
         this.surname = surname;
         this.photoUrl = photoUrl;
@@ -35,11 +37,11 @@ public class Executor implements Convertible {
         this.surname = surname;
     }
 
-    public String getPhotoUrl() {
+    public URI getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(String photoUrl) {
+    public void setPhotoUrl(URI photoUrl) {
         this.photoUrl = photoUrl;
     }
 
