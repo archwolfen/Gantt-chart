@@ -1,7 +1,7 @@
 package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.model.Convertible;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 public class Progress implements Convertible {
     private int percents;
@@ -18,7 +18,7 @@ public class Progress implements Convertible {
         this.percents = percents;
     }
 
-    public JsonObject toJson() {
+    public JsonElement toJson() {
         return null;
     }
 }

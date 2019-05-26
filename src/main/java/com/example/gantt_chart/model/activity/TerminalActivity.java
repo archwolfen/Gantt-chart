@@ -1,6 +1,6 @@
 package com.example.gantt_chart.model.activity;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 public class TerminalActivity extends Activity {
     public TerminalActivity(Dates startFinal, Progress progress, Ids nextIds) {
@@ -8,7 +8,7 @@ public class TerminalActivity extends Activity {
     }
 
     @Override
-    public JsonObject toJson() {
+    public JsonElement toJson() {
         return super.toJson();
     }
 }

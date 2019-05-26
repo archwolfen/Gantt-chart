@@ -1,6 +1,6 @@
 package com.example.gantt_chart.model.activity;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 public class SummaryActivity extends Activity {
     private SubActivities subactivities = new SubActivities();
@@ -14,7 +14,7 @@ public class SummaryActivity extends Activity {
     }
 
     @Override
-    public JsonObject toJson() {
+    public JsonElement toJson() {
         return super.toJson();
     }
 }
