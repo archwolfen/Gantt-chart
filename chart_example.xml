@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chart-data>
-    <activity title="Activity Name" id="some_id">
+    <activity title="Activity Name" id="123">
         <date>
             <start>1558804490</start>
             <end>1559150090</end><!--including-->
@@ -14,11 +14,11 @@
         </executors>
         <progress>67</progress><!--In %-->
         <next-ids>
-            <id>next-node1</id>
-            <id>next-node2</id>
+            <id>123</id>
+            <id>22</id>
         </next-ids>
         <sub-activities>
-            <activity title="Sub-activity Name" id="some_id">
+            <activity title="Sub-activity Name" id="53">
                 <date>
                     <start>1558804490</start>
                     <end>1559150090</end><!--including-->
