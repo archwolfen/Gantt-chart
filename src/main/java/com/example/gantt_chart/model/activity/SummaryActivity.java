@@ -17,7 +17,7 @@ public class SummaryActivity extends Activity {
         super(startFinal, progress, nextIds);
     }
 
-    public void addActivity(Activity activity) {
+    public void addActivity(SubActivities activitys) {
 
     }
 

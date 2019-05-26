@@ -5,6 +5,7 @@ import com.example.gantt_chart.model.activity.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import javax.naming.InvalidNameException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -42,7 +43,7 @@ public class Parser {
     }
 
     //for single activity
-    private Activity parse(Node node) throws Exception {
+    private Activity parse(Node node) throws InvalidNameException, ClassCastException {
 
         Activity task;
 
@@ -55,17 +56,17 @@ public class Parser {
 
         for(Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
-                Dates date = getDates(currData);
+                task.setStartFinal(getDates(currData));
             } else if (currData.getNodeName().equals("executors")) {
-                ExecutorList executorList = getExecutorList(currData);
+                task.setExecutors(getExecutorList(currData));
             } else if (currData.getNodeName().equals("progress")) {
-                Progress progress = getProgress(currData);
+                task.setProgress(getProgress(currData));
             } else if (currData.getNodeName().equals("next-ids")) {
-                Ids idList = getIdList(currData);
+                task.setNextIds(getIdList(currData));
             } else if (currData.getNodeName().equals("sub-activities")) {
-                SubActivities subActivities = getSubActivities(currData);
+                ((SummaryActivity)task).addActivity(getSubActivities(currData));
             } else {
-                throw new Exception("Unexpected node name: " + currData.getNodeName());
+                throw new InvalidNameException("Unexpected node name: " + currData.getNodeName());
             }
         }
 
@@ -92,7 +93,7 @@ public class Parser {
         return null;
     }
 
-    private SubActivities getSubActivities(Node node) throws Exception {
+    private SubActivities getSubActivities(Node node) throws InvalidNameException, ClassCastException {
         System.out.println("{");
         ArrayList<Node> activityList = getElementNodes(node.getChildNodes());
 

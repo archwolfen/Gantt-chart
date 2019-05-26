@@ -7,6 +7,7 @@ public abstract class Activity implements Convertible {
     private Dates startFinal;
     private Progress progress;
     private Ids nextIds;
+    private ExecutorList executors;
 
     public Activity(Dates startFinal, Progress progress, Ids nexIds) {
         this.startFinal = startFinal;
@@ -25,6 +26,14 @@ public abstract class Activity implements Convertible {
 
     public void setStartFinal(Dates startFinal) {
         this.startFinal = startFinal;
+    }
+
+    public ExecutorList getExecutors() {
+        return executors;
+    }
+
+    public void setExecutors(ExecutorList executors) {
+        this.executors = executors;
     }
 
     public Progress getProgress() {
