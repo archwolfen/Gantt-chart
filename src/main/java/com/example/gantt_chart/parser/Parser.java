@@ -165,38 +165,4 @@ public class Parser {
     private String getTextValue(Node node) {
         return node.getFirstChild().getNodeValue();
     }
-
-//    // TODO: 26.05.2019 Utilities
-//
-//    private ArrayList<Node> getElementNodes(NodeList list) {
-//
-//        ArrayList<Node> nodeList = new ArrayList<Node>();
-//
-//        // TODO: 26.05.2019 NodeList iterable
-//
-//        for(int i = 0; i < list.getLength(); i++)
-//        {
-//            Node currNode = list.item(i);
-//            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
-//                nodeList.add(list.item(i));
-//            }
-//        }
-//
-//        return nodeList;
-//    }
-//
-//    // return index of node with name "elem", in case this node does not exists return -1
-//
-//    private int getIndexOfElement(String elem, ArrayList<Node> dataList)
-//    {
-//        // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
-//        for (int i = 0; i < dataList.size(); i++)
-//        {
-//            if (dataList.get(i).getNodeName().equals(elem)) {
-//                return i;
-//            }
-//        }
-//
-//        return -1;
-//    }
 }
