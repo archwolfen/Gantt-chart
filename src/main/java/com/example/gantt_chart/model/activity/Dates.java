@@ -1,7 +1,9 @@
 package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.model.Convertible;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.Date;
 
@@ -31,6 +33,10 @@ public class Dates implements Convertible {
     }
 
     public JsonElement toJson() {
-        return null;
+        JsonObject result = new JsonObject();
+        result.addProperty("start-date", start.toString());
+        result.addProperty("end-date", end.toString());
+        result.addProperty("duration", (int)(end.getTime() - start.getTime()) / 24 * 60 * 60 * 1000);
+        return result;
     }
 }
