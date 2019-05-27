@@ -19,8 +19,8 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
         subactivities.addActivity(activity);
     }
 
-    public void addSubActivities(SubActivities activitys) {
-        subactivities.getActivities().addAll(activitys.getActivities());
+    public void addSubActivities(SubActivities activities) {
+        subactivities.getActivities().addAll(activities.getActivities());
     }
 
     @Override
