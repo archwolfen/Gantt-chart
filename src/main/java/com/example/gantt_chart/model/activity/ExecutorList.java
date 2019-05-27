@@ -11,13 +11,13 @@ import java.util.Iterator;
 public class ExecutorList implements Convertible {
     private ArrayList<Executor> executors = new ArrayList<Executor>();
 
-    public void  addExecutor(Executor e) {
+    public void addExecutor(Executor e) {
         executors.add(e);
     }
 
     public JsonElement toJson() {
         JsonArray jsonArray = new JsonArray();
-        for(Executor e : executors) {
+        for (Executor e : executors) {
             jsonArray.add(e.toJson());
         }
         return jsonArray;

@@ -1,5 +1,6 @@
 package com.example.gantt_chart.model.activity;
 
+import com.example.gantt_chart.exceptions.DatesException;
 import org.junit.Test;
 
 import java.net.URI;
@@ -9,7 +10,7 @@ import java.util.Date;
 public class TerminalActivityTest {
 
     @Test
-    public void toJson() throws URISyntaxException {
+    public void toJson() throws URISyntaxException, DatesException {
         TerminalActivity terminalActivity = new TerminalActivity();
         terminalActivity.setTitle("Act");
         terminalActivity.setId(32131);
