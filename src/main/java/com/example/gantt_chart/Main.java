@@ -11,7 +11,7 @@ public class Main {
 
             Parser xmlParser = new Parser("chart_example.xml");
             ActivityList taskList = xmlParser.parse();
-
+            
         } catch (Exception e)
         {
             e.printStackTrace();

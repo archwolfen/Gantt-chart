@@ -8,15 +8,15 @@ import com.google.gson.JsonPrimitive;
 public class Progress implements Convertible {
     private int percents;
 
+    public Progress(int percents) {
+        this.percents = percents;
+    }
+
     public int getPercents() {
         return percents;
     }
 
     public void setPercents(int percents) {
-        this.percents = percents;
-    }
-
-    public Progress(int percents) {
         this.percents = percents;
     }
 

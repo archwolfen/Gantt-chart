@@ -1,5 +1,6 @@
 package com.example.gantt_chart.parser;
 
+import com.example.gantt_chart.exceptions.DatesException;
 import com.example.gantt_chart.model.ActivityList;
 import com.example.gantt_chart.model.activity.*;
 import org.w3c.dom.*;
@@ -12,7 +13,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Parser {
@@ -46,16 +46,26 @@ public class Parser {
 
     //for single activity
     private TerminalActivity parse(Node node)
-            throws InvalidNameException, ClassCastException, URISyntaxException {
+            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException{
 
         TerminalActivity task;
 
         NodesArrayList dataList = new NodesArrayList(node.getChildNodes());
+        NamedNodeMap activityInfo = node.getAttributes();
 
-        if(dataList.hasElement("sub-activities"))
+
+        if(dataList.hasElement("sub-activities")) {
             task = new SummaryActivity();
-        else
+        }
+        else {
             task = new TerminalActivity();
+        }
+
+        String activityTitle = activityInfo.getNamedItem("title").getNodeValue();
+        String activityId = activityInfo.getNamedItem("id").getNodeValue();
+
+        task.setTitle(activityTitle);
+        task.setId(activityId);
 
         for(Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
@@ -88,7 +98,7 @@ public class Parser {
         return task;
     }
 
-    private Dates getDates(Node node) {
+    private Dates getDates(Node node) throws DatesException {
         NodesArrayList dates = new NodesArrayList(node.getChildNodes());
 
         String start = getTextValue(dates.get(dates.indexOfElement("start")));
@@ -133,23 +143,21 @@ public class Parser {
         return new Progress(Integer.parseInt(progress));
     }
 
-    private Ids getIdList(Node node) {
+    private IDList getIdList(Node node) {
         NodesArrayList ids = new NodesArrayList(node.getChildNodes());
 
-        Ids idList = new Ids();
+        IDList idList = new IDList();
 
         for (Node id : ids)
         {
-            String newID = getTextValue(id);
-
-            idList.addId(Integer.parseInt(newID));
+            idList.add(getTextValue(id));
         }
 
         return idList;
     }
 
     private SubActivities getSubActivities(Node node)
-            throws InvalidNameException, ClassCastException, URISyntaxException {
+            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException {
         NodesArrayList activityList = new NodesArrayList(node.getChildNodes());
 
         SubActivities subActivities = new SubActivities();
@@ -165,4 +173,38 @@ public class Parser {
     private String getTextValue(Node node) {
         return node.getFirstChild().getNodeValue();
     }
+
+//    // TODO: 26.05.2019 Utilities
+//
+//    private ArrayList<Node> getElementNodes(NodeList list) {
+//
+//        ArrayList<Node> nodeList = new ArrayList<Node>();
+//
+//        // TODO: 26.05.2019 NodeList iterable
+//
+//        for(int i = 0; i < list.getLength(); i++)
+//        {
+//            Node currNode = list.item(i);
+//            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
+//                nodeList.add(list.item(i));
+//            }
+//        }
+//
+//        return nodeList;
+//    }
+//
+//    // return index of node with name "elem", in case this node does not exists return -1
+//
+//    private int getIndexOfElement(String elem, ArrayList<Node> dataList)
+//    {
+//        // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
+//        for (int i = 0; i < dataList.size(); i++)
+//        {
+//            if (dataList.get(i).getNodeName().equals(elem)) {
+//                return i;
+//            }
+//        }
+//
+//        return -1;
+//    }
 }

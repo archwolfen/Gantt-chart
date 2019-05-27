@@ -6,16 +6,16 @@ import com.google.gson.JsonObject;
 
 public class TerminalActivity implements Convertible {
     private String title;
-    private Integer id;
+    private String id;
     private Dates startFinal;
     private ExecutorList executors;
     private Progress progress;
-    private Ids nextIds;
+    private IDList nextIds;
 
     public TerminalActivity() {
     }
 
-    public TerminalActivity(Dates startFinal, Progress progress, Ids nextIds, ExecutorList executors, String title, Integer id) {
+    public TerminalActivity(Dates startFinal, Progress progress, IDList nextIds, ExecutorList executors, String title, String id) {
         this.startFinal = startFinal;
         this.progress = progress;
         this.nextIds = nextIds;
@@ -48,11 +48,11 @@ public class TerminalActivity implements Convertible {
         this.progress = progress;
     }
 
-    public Ids getNextIds() {
+    public IDList getNextIds() {
         return nextIds;
     }
 
-    public void setNextIds(Ids nextIds) {
+    public void setNextIds(IDList nextIds) {
         this.nextIds = nextIds;
     }
 
@@ -64,11 +64,11 @@ public class TerminalActivity implements Convertible {
         this.title = title;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

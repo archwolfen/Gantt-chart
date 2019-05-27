@@ -6,16 +6,10 @@ import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 
-public class Ids implements Convertible {
-    private ArrayList<Integer> ids = new ArrayList<Integer>();
-
-    public void addId(final int id) {
-        ids.add(id);
-    }
-
+public class IDList extends ArrayList<String> implements Convertible {
     public JsonElement toJson() {
         JsonArray result = new JsonArray();
-        for (Integer id : ids) {
+        for (String id : this) {
             result.add(id);
         }
         return result;
