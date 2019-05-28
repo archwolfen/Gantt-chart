@@ -7,6 +7,8 @@ import { ListActivitiesComponent } from './list-activities/list-activities.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDividerModule, MatGridListModule, MatListModule} from '@angular/material';
 import { CanvasPartComponent } from './canvas-part/canvas-part.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import { CanvasPartComponent } from './canvas-part/canvas-part.component';
     BrowserAnimationsModule,
     MatListModule,
     MatGridListModule,
-    MatDividerModule
+    MatDividerModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@ export class Activity {
   private startDate: string;
   private endDate: string;
   private progress: number;
-  private next: Array<number>;
+  private next: Array<number  >;
   private duration: number;
 
   constructor(title: string, id: number, startDate: string, endDate: string, progress: number, next: Array<number>, duration: number) {
