@@ -1,6 +1,5 @@
 package com.example.gantt_chart.model.activity;
 
-import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

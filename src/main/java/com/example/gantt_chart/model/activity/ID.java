@@ -30,6 +30,10 @@ public class ID {
         return null;
     }
 
+    public static void clear() {
+        idList.clear();
+    }
+
     @Override
     public String toString() {
         return id;
