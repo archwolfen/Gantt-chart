@@ -11,7 +11,7 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
 
     }
 
-    public SummaryActivity(Dates startFinal, Progress progress, IDList nextIds, ExecutorList executors, String title, String id) {
+    public SummaryActivity(Dates startFinal, Progress progress, IDList nextIds, ExecutorList executors, String title, ID id) {
         super(startFinal, progress, nextIds, executors, title, id);
     }
 

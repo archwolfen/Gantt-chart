@@ -1,6 +1,7 @@
 package com.example.gantt_chart.parser;
 
 import com.example.gantt_chart.exceptions.DatesException;
+import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.ActivityList;
 import com.example.gantt_chart.model.activity.*;
 import org.w3c.dom.*;
@@ -46,7 +47,7 @@ public class Parser {
 
     //for single activity
     private TerminalActivity parse(Node node)
-            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException{
+            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException, IDException {
 
         TerminalActivity task;
 
@@ -94,6 +95,8 @@ public class Parser {
 
             }
         }
+
+        System.out.println(task.getNextIds().checkCorrectionID());
 
         return task;
     }
@@ -143,7 +146,7 @@ public class Parser {
         return new Progress(Integer.parseInt(progress));
     }
 
-    private IDList getIdList(Node node) {
+    private IDList getIdList(Node node) throws IDException {
         NodesArrayList ids = new NodesArrayList(node.getChildNodes());
 
         IDList idList = new IDList();
@@ -157,7 +160,7 @@ public class Parser {
     }
 
     private SubActivities getSubActivities(Node node)
-            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException {
+            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException, IDException {
         NodesArrayList activityList = new NodesArrayList(node.getChildNodes());
 
         SubActivities subActivities = new SubActivities();

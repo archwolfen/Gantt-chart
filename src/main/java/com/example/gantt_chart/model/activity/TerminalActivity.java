@@ -1,12 +1,13 @@
 package com.example.gantt_chart.model.activity;
 
+import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class TerminalActivity implements Convertible {
     private String title;
-    private String id;
+    private ID id;
     private Dates startFinal;
     private ExecutorList executors;
     private Progress progress;
@@ -15,7 +16,7 @@ public class TerminalActivity implements Convertible {
     public TerminalActivity() {
     }
 
-    public TerminalActivity(Dates startFinal, Progress progress, IDList nextIds, ExecutorList executors, String title, String id) {
+    public TerminalActivity(Dates startFinal, Progress progress, IDList nextIds, ExecutorList executors, String title, ID id) {
         this.startFinal = startFinal;
         this.progress = progress;
         this.nextIds = nextIds;
@@ -65,17 +66,22 @@ public class TerminalActivity implements Convertible {
     }
 
     public String getId() {
-        return id;
+        return id.toString();
     }
 
-    public void setId(String id) {
+    public void setId(ID id) {
         this.id = id;
     }
+
+    public void setId(String id) throws IDException {
+        this.id = new ID(id);
+    }
+
 
     public JsonElement toJson() {
         JsonObject activity = new JsonObject();
         activity.addProperty("title", title);
-        activity.addProperty("id", id);
+        activity.addProperty("id", id.toString());
         activity.add("date", startFinal.toJson());
         activity.add("executors", executors.toJson());
         activity.add("progress", progress.toJson());
