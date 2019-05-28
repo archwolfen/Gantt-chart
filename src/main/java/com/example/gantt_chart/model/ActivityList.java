@@ -7,6 +7,8 @@ import com.google.gson.JsonElement;
 import java.util.ArrayList;
 
 public class ActivityList extends ArrayList<TerminalActivity> implements Convertible {
+    private Dates projectTermins;
+
     public Dates calculateCriticalPath() {
         return null;
     }
