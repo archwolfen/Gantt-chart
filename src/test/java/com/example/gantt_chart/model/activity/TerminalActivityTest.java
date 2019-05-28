@@ -16,7 +16,7 @@ public class TerminalActivityTest {
         terminalActivity.setTitle("Act");
         terminalActivity.setId(new ID("32131"));
         ExecutorList list = new ExecutorList();
-        list.addExecutor(new Executor("Kek", "Lol", new URI("invalid")));
+        list.add(new Executor("Kek", "Lol", new URI("invalid")));
         terminalActivity.setExecutors(list);
         terminalActivity.setProgress(new Progress(65));
         IDList ids = new IDList();

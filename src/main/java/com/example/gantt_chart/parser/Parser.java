@@ -39,7 +39,7 @@ public class Parser {
 
         for(Node currActivity : activityList)
         {
-            taskList.addActivity(parse(currActivity));
+            taskList.add(parse(currActivity));
         }
 
         return taskList;
@@ -96,8 +96,6 @@ public class Parser {
             }
         }
 
-        System.out.println(task.getNextIds().checkCorrectionID());
-
         return task;
     }
 
@@ -121,7 +119,7 @@ public class Parser {
 
         for(Node executor : executors)
         {
-            executorList.addExecutor(getExecutor(executor));
+            executorList.add(getExecutor(executor));
         }
 
         return executorList;
@@ -146,7 +144,7 @@ public class Parser {
         return new Progress(Integer.parseInt(progress));
     }
 
-    private IDList getIdList(Node node) throws IDException {
+    private IDList getIdList(Node node) {
         NodesArrayList ids = new NodesArrayList(node.getChildNodes());
 
         IDList idList = new IDList();
@@ -167,7 +165,7 @@ public class Parser {
 
         for(Node currActivity : activityList)
         {
-            subActivities.addActivity(parse(currActivity));
+            subActivities.add(parse(currActivity));
         }
 
         return subActivities;

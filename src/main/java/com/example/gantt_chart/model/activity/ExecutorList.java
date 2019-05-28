@@ -8,16 +8,10 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ExecutorList implements Convertible {
-    private ArrayList<Executor> executors = new ArrayList<Executor>();
-
-    public void addExecutor(Executor e) {
-        executors.add(e);
-    }
-
+public class ExecutorList extends ArrayList<Executor> implements Convertible {
     public JsonElement toJson() {
         JsonArray jsonArray = new JsonArray();
-        for (Executor e : executors) {
+        for (Executor e : this) {
             jsonArray.add(e.toJson());
         }
         return jsonArray;

@@ -6,17 +6,7 @@ import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 
-public class ActivityList implements Convertible {
-
-    private ArrayList<TerminalActivity> allActivities = new ArrayList<TerminalActivity>();
-
-    public ActivityList() {
-    }
-
-    public void addActivity(TerminalActivity activity) {
-
-    }
-
+public class ActivityList extends ArrayList<TerminalActivity> implements Convertible {
     public Dates calculateCriticalPath() {
         return null;
     }

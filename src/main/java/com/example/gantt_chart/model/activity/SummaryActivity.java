@@ -16,11 +16,11 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
     }
 
     public void addSubActivity(TerminalActivity activity) {
-        subactivities.addActivity(activity);
+        subactivities.add(activity);
     }
 
     public void addSubActivities(SubActivities activities) {
-        subactivities.getActivities().addAll(activities.getActivities());
+        subactivities = activities;
     }
 
     @Override
