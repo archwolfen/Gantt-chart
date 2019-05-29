@@ -50,7 +50,7 @@ public class Server {
             Headers respHeaders = exchange.getResponseHeaders();
             if (!headers.containsKey("Content-Type")) {
                 String error = "<h1>400 Bad request: Content-Type is missing!</h1>";
-                respHeaders.add("Contnet-Type", "text/plain");
+                respHeaders.add("Content-Type", "text/plain");
                 exchange.sendResponseHeaders(400, error.length());
                 exchange.getResponseBody().write(error.getBytes());
                 exchange.getResponseBody().close();
@@ -58,7 +58,7 @@ public class Server {
             }
             if (headers.getFirst("Content-Type") != "application/xml") {
                 String error = "<h1>400 Bad request: Content-Type is not application/xml!</h1>";
-                respHeaders.add("Contnet-Type", "text/plain");
+                respHeaders.add("Content-Type", "text/plain");
                 exchange.sendResponseHeaders(400, error.length());
                 exchange.getResponseBody().write(error.getBytes());
                 exchange.getResponseBody().close();

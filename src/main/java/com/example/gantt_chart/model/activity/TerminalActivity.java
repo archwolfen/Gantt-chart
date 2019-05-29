@@ -73,8 +73,8 @@ public class TerminalActivity implements Convertible {
         this.id = id;
     }
 
-    public void setId(String id) throws IDException {
-        this.id = new ID(id);
+    public void setId(String id, TerminalActivity activity) throws IDException {
+        this.id = new ID(id, activity);
     }
 
 

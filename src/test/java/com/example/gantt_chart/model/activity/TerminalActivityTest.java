@@ -14,7 +14,7 @@ public class TerminalActivityTest {
     public void toJson() throws URISyntaxException, DatesException, IDException {
         TerminalActivity terminalActivity = new TerminalActivity();
         terminalActivity.setTitle("Act");
-        terminalActivity.setId(new ID("32131"));
+        terminalActivity.setId(new ID("32131", terminalActivity));
         ExecutorList list = new ExecutorList();
         list.add(new Executor("Kek", "Lol", new URI("invalid")));
         terminalActivity.setExecutors(list);
