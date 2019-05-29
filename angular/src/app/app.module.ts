@@ -1,26 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './app-material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
+import { ResizableModule } from 'angular-resizable-element';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
-import { ListActivitiesComponent } from './list-activities/list-activities.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDividerModule, MatGridListModule, MatListModule} from '@angular/material';
-import { CanvasPartComponent } from './canvas-part/canvas-part.component';
+import { HomeComponent } from './home/home.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MenuComponent,
-    ListActivitiesComponent,
-    CanvasPartComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatListModule,
-    MatGridListModule,
-    MatDividerModule
+    FormsModule,
+    MaterialModule, FormsModule, ReactiveFormsModule,
+    FlexLayoutModule,
+    HttpClientModule,
+    ResizableModule,
+    AppRoutingModule
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ChartComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
