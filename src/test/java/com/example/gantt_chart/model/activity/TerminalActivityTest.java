@@ -21,7 +21,7 @@ public class TerminalActivityTest {
         terminalActivity.setProgress(new Progress(65));
         IDList ids = new IDList();
         ids.add("32");
-        terminalActivity.setNextIds(ids);
+        terminalActivity.setDependencies(ids);
         terminalActivity.setStartFinal(new Dates(new Date(), new Date()));
         System.out.println(terminalActivity.toJson().toString());
     }

@@ -11,7 +11,7 @@ public class TerminalActivity implements Convertible {
     private Dates startFinal;
     private ExecutorList executors;
     private Progress progress;
-    private IDList nextIds;
+    private IDList dependencies;
 
     public TerminalActivity() {
     }
@@ -19,7 +19,7 @@ public class TerminalActivity implements Convertible {
     public TerminalActivity(Dates startFinal, Progress progress, IDList nextIds, ExecutorList executors, String title, ID id) {
         this.startFinal = startFinal;
         this.progress = progress;
-        this.nextIds = nextIds;
+        this.dependencies = nextIds;
         this.executors = executors;
         this.title = title;
         this.id = id;
@@ -49,12 +49,12 @@ public class TerminalActivity implements Convertible {
         this.progress = progress;
     }
 
-    public IDList getNextIds() {
-        return nextIds;
+    public IDList getDependencies() {
+        return dependencies;
     }
 
-    public void setNextIds(IDList nextIds) {
-        this.nextIds = nextIds;
+    public void setDependencies(IDList nextIds) {
+        this.dependencies = nextIds;
     }
 
     public String getTitle() {
@@ -85,7 +85,8 @@ public class TerminalActivity implements Convertible {
         activity.add("date", startFinal.toJson());
         activity.add("executors", executors.toJson());
         activity.add("progress", progress.toJson());
-        activity.add("next-ids", nextIds.toJson());
+        if(dependencies != null)
+            activity.add("dependencies", dependencies.toJson());
         return activity;
     }
 }

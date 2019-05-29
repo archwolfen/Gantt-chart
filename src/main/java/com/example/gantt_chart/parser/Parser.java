@@ -81,9 +81,9 @@ public class Parser {
 
                 task.setProgress(getProgress(currData));
 
-            } else if (currData.getNodeName().equals("next-ids")) {
+            } else if (currData.getNodeName().equals("dependencies")) {
 
-                task.setNextIds(getIdList(currData));
+                task.setDependencies(getIdList(currData));
 
             } else if (currData.getNodeName().equals("sub-activities")) {
 

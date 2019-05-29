@@ -13,10 +13,10 @@
             </executor>
         </executors>
         <progress>67</progress><!--In %-->
-        <next-ids>
+        <dependencies>
             <id>123</id>
             <id>22</id>
-        </next-ids>
+        </dependencies>
         <sub-activities>
             <activity title="Sub-activity Name" id="22">
                 <date>
@@ -41,10 +41,10 @@
                     </executor>
                 </executors>
                 <progress>67</progress><!--In %-->
-                <next-ids>
+                <dependencies>
                     <id>23</id>
                     <id>23</id>
-                </next-ids>
+                </dependencies>
             </activity>
         </sub-activities>
     </activity>
