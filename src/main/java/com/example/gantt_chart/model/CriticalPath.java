@@ -5,8 +5,11 @@ import com.example.gantt_chart.model.activity.Dates;
 import com.example.gantt_chart.model.activity.ID;
 import com.example.gantt_chart.model.activity.IDList;
 import com.example.gantt_chart.model.activity.TerminalActivity;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
@@ -86,6 +89,16 @@ public class CriticalPath implements Convertible {
     }
 
     public JsonElement toJson() {
-        return null;
+        ArrayList<IDList> criticalPaths = getCriticalPaths();
+        //Dates
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("duration", duration.toJson());
+        //Ids
+        JsonArray jsonArray = new JsonArray();
+        for (IDList path : criticalPaths) {
+            jsonArray.add(path.toJson());
+        }
+        jsonObject.add("paths", jsonArray);
+        return jsonObject;
     }
 }
