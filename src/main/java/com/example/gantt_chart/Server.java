@@ -1,20 +1,19 @@
 package com.example.gantt_chart;
 
-import com.google.gson.JsonObject;
+import com.example.gantt_chart.parser.Parser;
+import com.google.gson.JsonPrimitive;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import com.sun.xml.internal.ws.api.message.Header;
-import jdk.internal.util.xml.impl.Input;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class Server {
+    public static final String TMP_XML_FILE = "tmp.xml";
     HttpServer server = null;
 
     public void launch(Integer port) throws IOException {
@@ -56,7 +55,7 @@ public class Server {
                 exchange.getResponseBody().close();
                 return;
             }
-            if (headers.getFirst("Content-Type") != "application/xml") {
+            if (!(headers.getFirst("Content-Type").equals("application/xml") || headers.getFirst("Content-Type").equals("text/xml"))) {
                 String error = "<h1>400 Bad request: Content-Type is not application/xml!</h1>";
                 respHeaders.add("Content-Type", "text/plain");
                 exchange.sendResponseHeaders(400, error.length());
@@ -65,23 +64,37 @@ public class Server {
                 return;
             }
 
-            InputStream is = exchange.getRequestBody();
-            byte[] buffer = new byte[2048];
-            while (is.read(buffer) != -1) {
-                System.out.println(buffer);
-            }
-            is.close();
+            String responseXml = new BufferedReader(
+                    new InputStreamReader(
+                            exchange.getRequestBody()
+                    )
+            ).lines().collect(Collectors.joining("\n"));
+            //save into tmp file
+            FileOutputStream fos = new FileOutputStream(TMP_XML_FILE);
+            fos.write(responseXml.getBytes());
+            fos.close();
 
-            //response
-            exchange.getResponseHeaders().set("Content-Type", "application/js");
-            //here we return json array of activities(code below in test purposes only)
-            JsonObject object = new JsonObject();
-            object.addProperty("kaka", 3);
-            object.addProperty("kee", "safsaf");
-            exchange.sendResponseHeaders(200, object.toString().length());
-            OutputStream os = exchange.getResponseBody();
-            os.write(object.toString().getBytes());
-            os.close();
+            Parser parser = null;
+            try {
+                parser = new Parser(TMP_XML_FILE);
+                //TODO send parsed data
+                exchange.getResponseHeaders().set("Content-Type", "application/js");
+                byte[] jsonBytes = parser.parse().toJson().toString().getBytes();
+                exchange.sendResponseHeaders(200, jsonBytes.length);
+                OutputStream os = exchange.getResponseBody();
+                os.write(jsonBytes);
+                os.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                String errorReturnJson = new JsonPrimitive("Error").toString();
+                exchange.sendResponseHeaders(200, errorReturnJson.length());
+                OutputStream os = exchange.getResponseBody();
+                os.write(errorReturnJson.getBytes());
+                os.close();
+            } finally {
+                //deleting file
+                new File(TMP_XML_FILE).delete();
+            }
         }
     }
 }

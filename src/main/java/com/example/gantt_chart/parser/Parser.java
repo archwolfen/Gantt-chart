@@ -37,8 +37,7 @@ public class Parser {
 
         NodesArrayList activityList = new NodesArrayList(root.getChildNodes());
 
-        for(Node currActivity : activityList)
-        {
+        for (Node currActivity : activityList) {
             taskList.add(parse(currActivity));
         }
 
@@ -55,10 +54,9 @@ public class Parser {
         NamedNodeMap activityInfo = node.getAttributes();
 
 
-        if(dataList.hasElement("sub-activities")) {
+        if (dataList.hasElement("sub-activities")) {
             task = new SummaryActivity();
-        }
-        else {
+        } else {
             task = new TerminalActivity();
         }
 
@@ -68,7 +66,7 @@ public class Parser {
         task.setTitle(activityTitle);
         task.setId(new ID(activityId, task));
 
-        for(Node currData : dataList) {
+        for (Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
 
                 task.setStartFinal(getDates(currData));
@@ -87,7 +85,7 @@ public class Parser {
 
             } else if (currData.getNodeName().equals("sub-activities")) {
 
-                ((SummaryActivity)task).addSubActivities(getSubActivities(currData));
+                ((SummaryActivity) task).addSubActivities(getSubActivities(currData));
 
             } else {
 
@@ -117,8 +115,7 @@ public class Parser {
 
         ExecutorList executorList = new ExecutorList();
 
-        for(Node executor : executors)
-        {
+        for (Node executor : executors) {
             executorList.add(getExecutor(executor));
         }
 
@@ -149,8 +146,7 @@ public class Parser {
 
         IDList idList = new IDList();
 
-        for (Node id : ids)
-        {
+        for (Node id : ids) {
             idList.add(getTextValue(id));
         }
 
@@ -163,8 +159,7 @@ public class Parser {
 
         SubActivities subActivities = new SubActivities();
 
-        for(Node currActivity : activityList)
-        {
+        for (Node currActivity : activityList) {
             subActivities.add(parse(currActivity));
         }
 
