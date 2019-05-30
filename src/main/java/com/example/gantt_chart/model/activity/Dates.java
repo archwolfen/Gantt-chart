@@ -62,6 +62,10 @@ public class Dates implements Convertible {
         return end;
     }
 
+    public long getDurationInDays() {
+        return (end.getTime() - start.getTime()) / (24 * 60 * 60 * 1000) + 1;
+    }
+
     public void setEnd(@NotNull Date end) throws DatesException {
         checkDateForNull(end);
         this.end = end;
@@ -90,7 +94,7 @@ public class Dates implements Convertible {
         JsonObject result = new JsonObject();
         result.addProperty("start-date", new SimpleDateFormat("dd-MM-yyyy").format(start));
         result.addProperty("end-date", new SimpleDateFormat("dd-MM-yyyy").format(end));
-        result.addProperty("duration", (int) (end.getTime() - start.getTime()) / (24 * 60 * 60 * 1000) + 1);
+        result.addProperty("duration", getDurationInDays());
         return result;
     }
 

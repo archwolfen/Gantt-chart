@@ -8,12 +8,12 @@ import java.util.HashMap;
 
 public class ID {
     private static ArrayList<ID> idList = new ArrayList<ID>();
+
     private String id;
     private TerminalActivity activity;
 
     public ID(String id, TerminalActivity activity) throws IDException {
-        if(ID.getID(id) != null)
-        {
+        if (ID.getID(id) != null) {
             throw new IDException(id + " id already exist");
         }
 
@@ -23,10 +23,8 @@ public class ID {
     }
 
     public static ID getID(String id) {
-        for(ID curID : idList)
-        {
-            if(curID.toString().equals(id))
-            {
+        for (ID curID : idList) {
+            if (curID.toString().equals(id)) {
                 return curID;
             }
         }
@@ -34,11 +32,17 @@ public class ID {
         return null;
     }
 
+    public static ArrayList<ID> getIdList() {
+        return idList;
+    }
+
+    public TerminalActivity getActivity() {
+        return activity;
+    }
+
     public static TerminalActivity getActivityByID(String id) {
-        for(ID curID : idList)
-        {
-            if(curID.toString().equals(id))
-            {
+        for (ID curID : idList) {
+            if (curID.toString().equals(id)) {
                 return curID.activity;
             }
         }
