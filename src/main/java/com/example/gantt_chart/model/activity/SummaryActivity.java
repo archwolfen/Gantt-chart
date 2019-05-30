@@ -23,6 +23,18 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
         subactivities = activities;
     }
 
+    public boolean checkDateBounds() {
+        for(TerminalActivity activity : subactivities) {
+            if (activity.getStartFinal().getStart().compareTo(getStartFinal().getStart()) < 0)
+                return false;
+
+            if (activity.getStartFinal().getEnd().compareTo(getStartFinal().getEnd()) > 0)
+                return false;
+        }
+
+        return true;
+    }
+
     @Override
     public JsonElement toJson() {
         JsonElement jsonElement = super.toJson();
