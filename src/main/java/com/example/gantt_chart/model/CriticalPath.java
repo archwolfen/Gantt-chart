@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -21,7 +22,7 @@ public class CriticalPath implements Convertible {
     public CriticalPath(ActivityList activities) {
         this.activities = activities;
         try {
-            duration = new Dates(0, 1000000);
+            duration = new Dates(0, Long.MAX_VALUE);
         } catch (DatesException e) {
             e.printStackTrace();
         }
@@ -60,6 +61,9 @@ public class CriticalPath implements Convertible {
                 tmpDuration,
                 current,
                 path);
+        for (IDList list : criticalPaths) {
+            Collections.reverse(list);
+        }
         return criticalPaths;
     }
 
@@ -75,16 +79,20 @@ public class CriticalPath implements Convertible {
                 criticalPaths.clear();
             }
             if (tmpDuration == maxDuration.get()) {
-                criticalPaths.add(path);
+                IDList copy = new IDList();
+                copy.addAll(path);
+                criticalPaths.add(copy);
             }
         }
         //Keep going
-        for (String id : current.getDependencies()) {
-            TerminalActivity next = ID.getActivityByID(id);
-            long nextDuration = tmpDuration + next.getStartFinal().getDurationInDays();
-            path.add(id);
-            calculateCriticalPaths(criticalPaths, earliest, maxDuration, nextDuration, next, path);
-            path.remove(path.size() - 1);
+        if (current.getDependencies() != null) {
+            for (String id : current.getDependencies()) {
+                TerminalActivity next = ID.getActivityByID(id);
+                long nextDuration = tmpDuration + next.getStartFinal().getDurationInDays();
+                path.add(id);
+                calculateCriticalPaths(criticalPaths, earliest, maxDuration, nextDuration, next, path);
+                path.remove(path.size() - 1);
+            }
         }
     }
 
