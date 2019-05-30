@@ -66,7 +66,7 @@ public class Parser {
         String activityId = activityInfo.getNamedItem("id").getNodeValue();
 
         task.setTitle(activityTitle);
-        task.setId(activityId, task);
+        task.setId(new ID(activityId, task));
 
         for(Node currData : dataList) {
             if (currData.getNodeName().equals("date")) {
