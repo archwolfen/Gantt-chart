@@ -51,7 +51,7 @@ public class Main {
 
         Server server = new Server();
         server.launch(80);
-        System.out.print("Enter any symbol to stop server: ");
+        System.out.println("Enter any symbol to stop server..");
         Scanner scanner = new Scanner(System.in);
         scanner.next();
         server.stop();

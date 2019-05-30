@@ -85,7 +85,7 @@ public class Server {
                 os.write(jsonBytes);
                 os.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
                 String errorReturnJson = new JsonPrimitive("Error").toString();
                 exchange.sendResponseHeaders(200, errorReturnJson.length());
                 OutputStream os = exchange.getResponseBody();
