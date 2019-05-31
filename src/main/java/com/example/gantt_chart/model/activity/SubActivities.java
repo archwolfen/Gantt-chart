@@ -36,7 +36,17 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
     }
 
     public boolean checkDependencies() {
-//        TODO Implement the method
+        for (TerminalActivity activity : this)
+        {
+            for (String id : activity.getDependencies())
+            {
+                if (idsPool.indexOf(id) == -1)
+                {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 
