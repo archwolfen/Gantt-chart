@@ -7,14 +7,20 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import javax.xml.XMLConstants;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.Date;
 import java.util.stream.Collectors;
 
 public class Server {
-    public static final String TMP_XML_FILE = "tmp.xml";
-    HttpServer server = null;
+    private static final String TMP_XML_FILE = "tmp.xml";
+    private HttpServer server = null;
 
     public void launch(Integer port) throws IOException {
         if (server != null) {
@@ -36,7 +42,7 @@ public class Server {
 
     //here we receive xml and return json
     static class ChartRequestHandler implements HttpHandler {
-        public void handle(HttpExchange exchange) throws IOException {
+        public synchronized void handle(HttpExchange exchange) throws IOException {
             String method = exchange.getRequestMethod();
             if (method.equalsIgnoreCase("GET")) {
                 String error = "<h1>403 Forbidden!</h1>";
@@ -74,10 +80,17 @@ public class Server {
             fos.write(responseXml.getBytes());
             fos.close();
 
-            Parser parser = null;
+            File schemaFile = new File("xmlconf.xsd");
+            Source xmlFile = new StreamSource(new File(TMP_XML_FILE));
+            SchemaFactory schemaFactory = SchemaFactory
+                    .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             try {
-                parser = new Parser(TMP_XML_FILE);
-                //TODO send parsed data
+                Schema schema = schemaFactory.newSchema(schemaFile);
+                Validator validator = schema.newValidator();
+                validator.validate(xmlFile);
+                System.out.println(xmlFile.getSystemId() + " is valid");
+                Parser parser = new Parser(TMP_XML_FILE);
+
                 exchange.getResponseHeaders().set("Content-Type", "application/js");
                 byte[] jsonBytes = parser.parse().toJson().toString().getBytes();
                 exchange.sendResponseHeaders(200, jsonBytes.length);
@@ -85,14 +98,14 @@ public class Server {
                 os.write(jsonBytes);
                 os.close();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
                 String errorReturnJson = new JsonPrimitive("Error").toString();
                 exchange.sendResponseHeaders(200, errorReturnJson.length());
                 OutputStream os = exchange.getResponseBody();
                 os.write(errorReturnJson.getBytes());
                 os.close();
             } finally {
-                //deleting file
+//                deleting file
                 new File(TMP_XML_FILE).delete();
             }
         }

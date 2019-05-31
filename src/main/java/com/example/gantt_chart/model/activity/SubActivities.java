@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Stream;
 
 public class SubActivities extends ArrayList<TerminalActivity> implements Convertible {
     private IDList idsPool = new IDList();
@@ -36,12 +35,9 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
     }
 
     public boolean checkDependencies() {
-        for (TerminalActivity activity : this)
-        {
-            for (String id : activity.getDependencies())
-            {
-                if (idsPool.indexOf(id) == -1)
-                {
+        for (TerminalActivity activity : this) {
+            for (String id : activity.getDependencies()) {
+                if (idsPool.indexOf(id) == -1) {
                     return false;
                 }
             }

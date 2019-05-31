@@ -85,7 +85,7 @@ public class TerminalActivity implements Convertible {
         activity.add("date", startFinal.toJson());
         activity.add("executors", executors.toJson());
         activity.add("progress", progress.toJson());
-        if(dependencies != null)
+        if (dependencies != null)
             activity.add("dependencies", dependencies.toJson());
         return activity;
     }
