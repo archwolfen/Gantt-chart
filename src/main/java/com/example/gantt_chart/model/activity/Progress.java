@@ -18,6 +18,7 @@ public class Progress implements Convertible {
     public void setPercents(int percents) {
         this.percents = percents;
     }
+    // TODO: 01.06.2019 0-percents-100
 
     public JsonElement toJson() {
         return new JsonPrimitive(percents);

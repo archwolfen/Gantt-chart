@@ -77,6 +77,14 @@ public class TerminalActivity implements Convertible {
         this.id = new ID(id, activity);
     }
 
+    public boolean checkDependenciesBounds() {
+        for(String id : dependencies) {
+            if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) > -1)
+                return false;
+        }
+
+        return true;
+    }
 
     public JsonElement toJson() {
         JsonObject activity = new JsonObject();
