@@ -40,16 +40,7 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
 
     public void checkDependencies() throws DependencyException {
         for (TerminalActivity activity : this) {
-            if (activity.getDependencies() != null) {
-                for (String id : activity.getDependencies()) {
-                    if (!idsPool.contains(id)) {
-                        throw new DependencyException("Activity mustn't depend on activity from another sub-activities");
-                    }
-                }
-            }
-            if (activity instanceof SummaryActivity) {
-                ((SummaryActivity) activity).getSubactivities().checkDependencies();
-            }
+            activity.checkDependencies(idsPool);
         }
     }
 
