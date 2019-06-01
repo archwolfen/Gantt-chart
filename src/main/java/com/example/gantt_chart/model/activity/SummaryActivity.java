@@ -29,11 +29,11 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
     public void checkDateBounds() throws DatesException {
         for (TerminalActivity activity : subactivities) {
             if (activity.getStartFinal().getStart().compareTo(getStartFinal().getStart()) < 0) {
-                throw new DatesException("Sub-activity can't start earlier than its summary activity");
+                throw new DatesException(String.format("Sub-activity [%s] can't start earlier than its summary activity", activity.getTitle()));
             }
 
             if (activity.getStartFinal().getEnd().compareTo(getStartFinal().getEnd()) > 0) {
-                throw new DatesException("Sub-activity can't end later than its summary activity");
+                throw new DatesException(String.format("Sub-activity [%s] can't end later than its summary activity", activity.getTitle()));
             }
 
             if (activity instanceof SummaryActivity) {

@@ -92,7 +92,7 @@ public class TerminalActivity implements Convertible {
         if (dependencies != null) {
             for (String id : dependencies) {
                 if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) >= 0) {
-                    throw new DependencyException("Start date of dependent activity can`t merge with end date of activity that had to be done before this!");
+                    throw new DependencyException(String.format("Finish date of activity [%s] has to go before start date of activity[%s}", ID.getActivityByID(id).getTitle(), getTitle()));
                 }
             }
         }
@@ -102,7 +102,7 @@ public class TerminalActivity implements Convertible {
         if (dependencies != null) {
             for (String id : dependencies) {
                 if (!poolIds.contains(id)) {
-                    throw new DependencyException("Activity mustn't depend on activity from another sub-activities");
+                    throw new DependencyException(String.format("Activity [%s] mustn't depend on activity from another sub-activities", getTitle()));
                 }
             }
         }
