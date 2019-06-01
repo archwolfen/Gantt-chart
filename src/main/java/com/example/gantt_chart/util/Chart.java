@@ -22,7 +22,7 @@ import java.util.Map;
 public class Chart {
     private GanttChart chart;
     private GanttModel chartData;
-    private Map<Task, ExecutorList> executorsMap = new HashMap<>();
+    private Map<String, ExecutorList> executorsMap = new HashMap<>();
 
     public Chart() {
         chart = new GanttChart();
@@ -31,7 +31,7 @@ public class Chart {
         Config config = chart.getConfig();
         config.setWorkingTimeBackColor(Color.WHITE);
         config.setTimeUnitWidth(50);
-        config.setWorkingDaysSpanOfWeek(new int[]{Calendar.MONDAY, Calendar.FRIDAY});
+        config.setWorkingDaysSpanOfWeek(new int[]{Calendar.MONDAY, Calendar.SATURDAY});
 
         chart.setCorner(JScrollPane.UPPER_LEFT_CORNER, new JPanel());
 
@@ -43,7 +43,7 @@ public class Chart {
             JPanel infoPanel = new JPanel();
             infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
             ((JPanel) window.getRoot().getComponent(Window.INFO_PANEL)).add(infoPanel);
-            ExecutorList executorList = executorsMap.get(selectionChangeEvent.getSelection());
+            ExecutorList executorList = executorsMap.get(selectionChangeEvent.getSelection().getName());
             StringBuilder executors = new StringBuilder();
             for (Executor e : executorList) {
                 executors.append(e.getName() + " " + e.getSurname() + "; ");
@@ -71,7 +71,7 @@ public class Chart {
 
     public void addTask(Task task, ExecutorList list) {
         chartData.addTask(task);
-        executorsMap.put(task, list);
+        executorsMap.put(task.getName(), list);
     }
 
     public GanttChart getChartView() {
