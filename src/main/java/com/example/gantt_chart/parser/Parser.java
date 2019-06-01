@@ -2,6 +2,7 @@ package com.example.gantt_chart.parser;
 
 import com.example.gantt_chart.exceptions.DatesException;
 import com.example.gantt_chart.exceptions.IDException;
+import com.example.gantt_chart.exceptions.ProgressException;
 import com.example.gantt_chart.model.ActivityList;
 import com.example.gantt_chart.model.activity.*;
 import org.w3c.dom.Document;
@@ -26,7 +27,6 @@ public class Parser {
             throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        // Создается дерево DOM документа из файла
         document = documentBuilder.parse(pathToXml);
     }
 
@@ -36,7 +36,6 @@ public class Parser {
 
         ActivityList taskList = new ActivityList();
 
-        // Получаем корневой элемент
         Node root = document.getDocumentElement();
 
         NodesArrayList activityList = new NodesArrayList(root.getChildNodes());
@@ -45,12 +44,20 @@ public class Parser {
             taskList.add(parse(currActivity));
         }
 
+        for (TerminalActivity a : taskList) {
+            a.checkDependenciesBounds();
+            a.getDependencies().checkCorrectionID();
+            if (a instanceof SummaryActivity) {
+                ((SummaryActivity) a).getSubactivities().checkDependencies();
+            }
+        }
+
         return taskList;
     }
 
     //for single activity
     private TerminalActivity parse(Node node)
-            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException, IDException {
+            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException, IDException, ProgressException {
 
         TerminalActivity task;
 
@@ -133,7 +140,7 @@ public class Parser {
         return new Executor(executorName, executorSurname, new URI(photoURI));
     }
 
-    private Progress getProgress(Node node) {
+    private Progress getProgress(Node node) throws ProgressException {
         String progress = getTextValue(node);
 
         return new Progress(Integer.parseInt(progress));
@@ -152,7 +159,7 @@ public class Parser {
     }
 
     private SubActivities getSubActivities(Node node)
-            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException, IDException {
+            throws InvalidNameException, ClassCastException, URISyntaxException, DatesException, IDException, ProgressException {
         NodesArrayList activityList = new NodesArrayList(node.getChildNodes());
 
         SubActivities subActivities = new SubActivities();
@@ -167,38 +174,4 @@ public class Parser {
     private String getTextValue(Node node) {
         return node.getFirstChild().getNodeValue();
     }
-
-//    // TODO: 26.05.2019 Utilities
-//
-//    private ArrayList<Node> getElementNodes(NodeList list) {
-//
-//        ArrayList<Node> nodeList = new ArrayList<Node>();
-//
-//        // TODO: 26.05.2019 NodeList iterable
-//
-//        for(int i = 0; i < list.getLength(); i++)
-//        {
-//            Node currNode = list.item(i);
-//            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
-//                nodeList.add(list.item(i));
-//            }
-//        }
-//
-//        return nodeList;
-//    }
-//
-//    // return index of node with name "elem", in case this node does not exists return -1
-//
-//    private int getIndexOfElement(String elem, ArrayList<Node> dataList)
-//    {
-//        // TODO: 26.05.2019 Спитати в Миколи як бути з цим гавном
-//        for (int i = 0; i < dataList.size(); i++)
-//        {
-//            if (dataList.get(i).getNodeName().equals(elem)) {
-//                return i;
-//            }
-//        }
-//
-//        return -1;
-//    }
 }

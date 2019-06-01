@@ -1,5 +1,6 @@
 package com.example.gantt_chart.model.activity;
 
+import com.example.gantt_chart.exceptions.DependencyException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -35,14 +36,12 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
         return super.addAll(i, collection);
     }
 
-    public boolean checkDependencies() {
+    public void checkDependencies() throws DependencyException {
         for (TerminalActivity activity : this)
-            if(activity.getDependencies() != null)
+            if (activity.getDependencies() != null)
                 for (String id : activity.getDependencies())
                     if (idsPool.indexOf(id) == -1)
-                        return false;
-
-        return true;
+                        throw new DependencyException("Subactivity of current activity can`t have previous activity as one of previous activity from the path!");
     }
 
     public JsonElement toJson() {
