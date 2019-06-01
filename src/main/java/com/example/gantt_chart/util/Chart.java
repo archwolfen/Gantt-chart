@@ -2,13 +2,10 @@ package com.example.gantt_chart.util;
 
 import com.example.gantt_chart.model.activity.Executor;
 import com.example.gantt_chart.model.activity.ExecutorList;
-import com.example.gantt_chart.model.activity.ID;
 import com.example.gantt_chart.view.Window;
 import org.swiftgantt.Config;
 import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.Time;
-import org.swiftgantt.event.SelectionChangeEvent;
-import org.swiftgantt.event.SelectionChangeListener;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.ui.TimeUnit;
@@ -40,16 +37,24 @@ public class Chart {
 
         chart.addSelectionChangeListener(selectionChangeEvent -> {
             Window window = Window.getInstance();
-            System.out.println(selectionChangeEvent.getSelection().getName());
-            ExecutorList executorList = executorsMap.get(selectionChangeEvent.getSelection().getName());
-            StringBuilder executors = new StringBuilder();
-            for (Executor e : executorList) {
-                executors.append(e.getName() + " " + e.getSurname() + "; ");
+            if (selectionChangeEvent.getSelection() != null) {
+                ExecutorList executorList = executorsMap.get(selectionChangeEvent.getSelection().getName());
+
+
+                StringBuilder executors = new StringBuilder();
+                for (Executor e : executorList) {
+                    executors.append(e.getName() + " " + e.getSurname() + "; ");
+                }
+                ((JLabel) ((JPanel) ((JPanel) window.getRoot().getComponent(Window.INFO_PANEL)).getComponent(0)).getComponent(0)).setText("Executors: " + executors.toString());
+                window.getRoot().invalidate();
+                window.getRoot().validate();
+                window.getRoot().repaint();
+            } else {
+                ((JLabel) ((JPanel) ((JPanel) window.getRoot().getComponent(Window.INFO_PANEL)).getComponent(0)).getComponent(0)).setText("");
+                window.getRoot().invalidate();
+                window.getRoot().validate();
+                window.getRoot().repaint();
             }
-            ((JLabel)((JPanel)((JPanel)window.getRoot().getComponent(Window.INFO_PANEL)).getComponent(0)).getComponent(0)).setText("Executors: " + executors.toString());
-            window.getRoot().invalidate();
-            window.getRoot().validate();
-            window.getRoot().repaint();
         });
     }
 
