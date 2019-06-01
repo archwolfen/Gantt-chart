@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <chart-data>
-    <activity title="Activity Name" id="1">
+    <activity title="Task1" id="1">
         <date>
-            <start>1558804490</start>
-            <end>1559150090</end>
+            <start>1546293600000</start>
+            <end>1546898400000</end><!--including-->
         </date>
         <executors>
             <executor>
@@ -14,10 +14,10 @@
         </executors>
         <progress>67</progress><!--In %-->
         <sub-activities>
-            <activity title="Sub-activity Name" id="1-2">
+            <activity title="Sub-activity Name" id="8">
                 <date>
-                    <start>1558804490</start>
-                    <end>1559150090</end><!--including-->
+                    <start>1546293600000</start>
+                    <end>1546898400000</end><!--including-->
                 </date>
                 <executors>
                     <executor>
@@ -39,5 +39,57 @@
                 <progress>67</progress><!--In %-->
             </activity>
         </sub-activities>
+    </activity>
+    <activity title="Task2" id="2">
+        <date>
+            <start>1546984800000</start>
+            <end>1548367200000</end><!--including-->
+        </date>
+        <executors>
+            <executor>
+                <name>Vladyslav</name>
+                <surname>Manzhula</surname>
+                <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+            </executor>
+        </executors>
+        <progress>67</progress><!--In %-->
+        <dependencies>
+            <id>1</id>
+        </dependencies>
+    </activity>
+    <activity title="Task3" id="3">
+        <date>
+            <start>1546984800000</start>
+            <end>1549058400000</end><!--including-->
+        </date>
+        <executors>
+            <executor>
+                <name>Vladyslav</name>
+                <surname>Manzhula</surname>
+                <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+            </executor>
+        </executors>
+        <progress>67</progress><!--In %-->
+        <dependencies>
+            <id>1</id>
+        </dependencies>
+    </activity>
+    <activity title="FinalTask" id="4">
+        <date>
+            <start>1549749600000</start>
+            <end>1550613600000</end><!--including-->
+        </date>
+        <executors>
+            <executor>
+                <name>Vladyslav</name>
+                <surname>Manzhula</surname>
+                <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+            </executor>
+        </executors>
+        <progress>67</progress><!--In %-->
+        <dependencies>
+            <id>2</id>
+            <id>3</id>
+        </dependencies>
     </activity>
 </chart-data>
