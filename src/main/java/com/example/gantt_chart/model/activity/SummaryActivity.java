@@ -38,7 +38,7 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
     @Override
     public void checkDependenciesBounds() throws DependencyException {
         super.checkDependenciesBounds();
-        subactivities.checkDependencies();
+        subactivities.checkDependenciesBounds();
     }
 
     public SubActivities getSubactivities() {
