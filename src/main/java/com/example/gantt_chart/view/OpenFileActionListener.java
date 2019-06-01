@@ -27,7 +27,7 @@ public class OpenFileActionListener implements ActionListener {
             ExecutorList executorList = new ExecutorList();
             executorList.add(new Executor("Name", "Surname"));
 
-            
+
             //TODO parse xml and add chart creation
             ((JScrollPane) window.getRoot().getComponent(Window.SCROLL_PANE)).setViewportView(chart.getChartView());
         } else {
