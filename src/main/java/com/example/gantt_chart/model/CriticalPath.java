@@ -6,7 +6,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class CriticalPath implements Convertible {
@@ -20,6 +23,11 @@ public class CriticalPath implements Convertible {
         } catch (DatesException e) {
             //Exception couldn't be thrown because date is already correct
         }
+    }
+
+    public Dates getDuration() {
+        getCriticalPaths();
+        return duration;
     }
 
     public ArrayList<IDList> getCriticalPaths() {
