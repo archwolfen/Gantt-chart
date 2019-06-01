@@ -78,6 +78,16 @@ public class TerminalActivity implements Convertible {
         this.id = new ID(id, activity);
     }
 
+    public void checkDependenciesIdExistence() throws IDException {
+        if (dependencies != null) {
+            for (String id : dependencies) {
+                if (ID.getID(id) == null) {
+                    throw new IDException(String.format("ID [%s] in Activity[%s] dependencies doesn't exist", id, title));
+                }
+            }
+        }
+    }
+
     public void checkDependenciesBounds() throws DependencyException {
         if (dependencies != null) {
             for (String id : dependencies) {
