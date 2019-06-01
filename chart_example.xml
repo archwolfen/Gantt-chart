@@ -164,7 +164,7 @@
             <activity title="Sub-activity5.1" id="5.1">
                 <date>
                     <start>1551045600000</start>
-                    <end>1551304800000</end><!--including-->
+                    <end>1551218400000</end><!--including-->
                 </date>
                 <executors>
                     <executor>
