@@ -50,6 +50,8 @@ public class Parser {
                 a.getDependencies().checkCorrectionID();
             if (a instanceof SummaryActivity) {
                 ((SummaryActivity) a).getSubactivities().checkDependencies();
+                ((SummaryActivity) a).checkDateBounds();
+
             }
             a.checkDependenciesBounds();
         }
