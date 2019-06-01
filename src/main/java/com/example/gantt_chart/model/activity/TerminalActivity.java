@@ -98,6 +98,16 @@ public class TerminalActivity implements Convertible {
         }
     }
 
+    public void checkDependencies(IDList poolIds) throws DependencyException {
+        if (dependencies != null) {
+            for (String id : dependencies) {
+                if (!poolIds.contains(id)) {
+                    throw new DependencyException("Activity mustn't depend on activity from another sub-activities");
+                }
+            }
+        }
+    }
+
     public JsonElement toJson() {
         JsonObject activity = new JsonObject();
         activity.addProperty("title", title);
