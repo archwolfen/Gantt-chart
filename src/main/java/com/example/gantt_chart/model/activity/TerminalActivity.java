@@ -1,5 +1,6 @@
 package com.example.gantt_chart.model.activity;
 
+import com.example.gantt_chart.exceptions.DependencyException;
 import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
@@ -77,6 +78,12 @@ public class TerminalActivity implements Convertible {
         this.id = new ID(id, activity);
     }
 
+    public void checkDependenciesBounds() throws DependencyException {
+        for (String id : dependencies) {
+            if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) > -1)
+                throw new DependencyException("Start date of dependent activity can`t merge with end date of activity that had to be done before this!");
+        }
+    }
 
     public JsonElement toJson() {
         JsonObject activity = new JsonObject();
