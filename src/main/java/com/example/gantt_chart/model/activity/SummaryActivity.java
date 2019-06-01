@@ -35,6 +35,10 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
         return true;
     }
 
+    public SubActivities getSubactivities() {
+        return subactivities;
+    }
+
     @Override
     public JsonElement toJson() {
         JsonElement jsonElement = super.toJson();
