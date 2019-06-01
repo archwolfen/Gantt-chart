@@ -44,13 +44,11 @@ public class Parser {
             taskList.add(parse(currActivity));
         }
 
-        for (TerminalActivity a : taskList) {
-            a.checkDependenciesBounds();
-            a.getDependencies().checkCorrectionID();
-            if (a instanceof SummaryActivity) {
-                ((SummaryActivity) a).getSubactivities().checkDependencies();
-            }
-        }
+        taskList.checkDependencies();
+        taskList.checkDependenciesBounds();
+        taskList.checkDependenciesIdExistence();
+        taskList.checkDateBounds();
+        taskList.sort();
 
         return taskList;
     }

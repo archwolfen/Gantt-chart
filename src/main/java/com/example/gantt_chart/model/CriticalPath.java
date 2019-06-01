@@ -6,7 +6,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class CriticalPath implements Convertible {
@@ -20,6 +23,11 @@ public class CriticalPath implements Convertible {
         } catch (DatesException e) {
             //Exception couldn't be thrown because date is already correct
         }
+    }
+
+    public Dates getDuration() {
+        getCriticalPaths();
+        return duration;
     }
 
     public ArrayList<IDList> getCriticalPaths() {
@@ -38,7 +46,8 @@ public class CriticalPath implements Convertible {
             //Exception couldn't be thrown because date is already correct
         }
         //Calculate also subactivites, if they present
-        for (IDList list : criticalPath) {
+        for (int k = 0; k < criticalPath.size(); ++k) {
+            IDList list = criticalPath.get(k);
             for (int i = 0; i < list.size(); ++i) {
                 String currId = list.get(i);
                 //Skip id if it has been already checked
@@ -51,6 +60,7 @@ public class CriticalPath implements Convertible {
                             ((SummaryActivity) activity).getSubactivities()
                     );
                     IDList tmpCopy = new IDList();
+                    tmpCopy.addAll(list);
                     list.addAll(i, subCritical.get(0));
                     //If subcritical path is not only one
                     for (int j = 1; j < subCritical.size(); ++j) {

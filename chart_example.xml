@@ -14,10 +14,10 @@
         </executors>
         <progress>67</progress><!--In %-->
         <sub-activities>
-            <activity title="Sub-activity Name" id="8">
+            <activity title="Sub-activity1.1" id="1.1">
                 <date>
                     <start>1546293600000</start>
-                    <end>1546898400000</end><!--including-->
+                    <end>1546380000000</end><!--including-->
                 </date>
                 <executors>
                     <executor>
@@ -38,12 +38,64 @@
                 </executors>
                 <progress>67</progress><!--In %-->
             </activity>
+            <activity title="Sub-activity1.2" id="1.2">
+                <date>
+                    <start>1546293600000</start>
+                    <end>1546725600000</end><!--including-->
+                </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
+                <progress>67</progress><!--In %-->
+            </activity>
+            <activity title="Sub-activity1.3" id="1.3">
+                <date>
+                    <start>1546812000000</start>
+                    <end>1546898400000</end><!--including-->
+                </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
+                <progress>67</progress><!--In %-->
+                <dependencies>
+                    <id>1.1</id>
+                    <id>1.2</id>
+                </dependencies>
+            </activity>
         </sub-activities>
     </activity>
     <activity title="Task2" id="2">
         <date>
-            <start>1546984800000</start>
-            <end>1548367200000</end><!--including-->
+            <start>1547071200000</start>
+            <end>1549576800000</end><!--including-->
         </date>
         <executors>
             <executor>
@@ -59,8 +111,8 @@
     </activity>
     <activity title="Task3" id="3">
         <date>
-            <start>1546984800000</start>
-            <end>1549058400000</end><!--including-->
+            <start>1547071200000</start>
+            <end>1550613600000</end><!--including-->
         </date>
         <executors>
             <executor>
@@ -74,7 +126,7 @@
             <id>1</id>
         </dependencies>
     </activity>
-    <activity title="FinalTask" id="4">
+    <activity title="Task4" id="4">
         <date>
             <start>1549749600000</start>
             <end>1550613600000</end><!--including-->
@@ -89,7 +141,129 @@
         <progress>67</progress><!--In %-->
         <dependencies>
             <id>2</id>
+        </dependencies>
+    </activity>
+    <activity title="Task5" id="5">
+        <date>
+            <start>1551045600000</start>
+            <end>1552600800000</end><!--including-->
+        </date>
+        <executors>
+            <executor>
+                <name>Vladyslav</name>
+                <surname>Manzhula</surname>
+                <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+            </executor>
+        </executors>
+        <progress>67</progress><!--In %-->
+        <dependencies>
+            <id>4</id>
             <id>3</id>
         </dependencies>
+        <sub-activities>
+            <activity title="Sub-activity5.1" id="5.1">
+                <date>
+                    <start>1551045600000</start>
+                    <end>1551218400000</end><!--including-->
+                </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
+                <progress>67</progress><!--In %-->
+            </activity>
+            <activity title="Sub-activity5.2" id="5.2">
+                <date>
+                    <start>1551045600000</start>
+                    <end>1551564000000</end><!--including-->
+                </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
+                <progress>67</progress><!--In %-->
+            </activity>
+            <activity title="Sub-activity5.3" id="5.3">
+                <date>
+                    <start>1551304800000</start>
+                    <end>1551564000000</end><!--including-->
+                </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
+                <progress>67</progress><!--In %-->
+                <dependencies>
+                    <id>5.1</id>
+                </dependencies>
+            </activity>
+            <activity title="Sub-activity5.4" id="5.4">
+                <date>
+                    <start>1551736800000</start>
+                    <end>1552600800000</end><!--including-->
+                </date>
+                <executors>
+                    <executor>
+                        <name>Kostiantyn</name>
+                        <surname>Synytsia</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Anton</name>
+                        <surname>Vovk</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                    <executor>
+                        <name>Sviatoslav</name>
+                        <surname>Konstantyniv</surname>
+                        <photo src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"/>
+                    </executor>
+                </executors>
+                <progress>67</progress><!--In %-->
+                <dependencies>
+                    <id>5.2</id>
+                    <id>5.3</id>
+                </dependencies>
+            </activity>
+        </sub-activities>
     </activity>
 </chart-data>

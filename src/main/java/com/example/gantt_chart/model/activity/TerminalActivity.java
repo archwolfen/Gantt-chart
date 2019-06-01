@@ -78,10 +78,33 @@ public class TerminalActivity implements Convertible {
         this.id = new ID(id, activity);
     }
 
+    public void checkDependenciesIdExistence() throws IDException {
+        if (dependencies != null) {
+            for (String id : dependencies) {
+                if (ID.getID(id) == null) {
+                    throw new IDException(String.format("ID [%s] in Activity[%s] dependencies doesn't exist", id, title));
+                }
+            }
+        }
+    }
+
     public void checkDependenciesBounds() throws DependencyException {
-        for (String id : dependencies) {
-            if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) > -1)
-                throw new DependencyException("Start date of dependent activity can`t merge with end date of activity that had to be done before this!");
+        if (dependencies != null) {
+            for (String id : dependencies) {
+                if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) >= 0) {
+                    throw new DependencyException(String.format("Finish date of activity [%s] has to go before start date of activity[%s}", ID.getActivityByID(id).getTitle(), getTitle()));
+                }
+            }
+        }
+    }
+
+    public void checkDependencies(IDList poolIds) throws DependencyException {
+        if (dependencies != null) {
+            for (String id : dependencies) {
+                if (!poolIds.contains(id)) {
+                    throw new DependencyException(String.format("Activity [%s] mustn't depend on activity from another sub-activities", getTitle()));
+                }
+            }
         }
     }
 
