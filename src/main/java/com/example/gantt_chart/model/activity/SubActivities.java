@@ -8,8 +8,6 @@ import com.google.gson.JsonElement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.stream.Stream;
 
 public class SubActivities extends ArrayList<TerminalActivity> implements Convertible {
     private IDList idsPool = new IDList();
@@ -42,10 +40,13 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
         for (TerminalActivity activity : this) {
             if (activity.getDependencies() != null) {
                 for (String id : activity.getDependencies()) {
-                    if (idsPool.indexOf(id) == -1) {
-                        throw new DependencyException("Subactivity of current activity can`t have previous activity as one of previous activity from the path!");
+                    if (!idsPool.contains(id)) {
+                        throw new DependencyException("Activity mustn't depend on activity from another sub-activities");
                     }
                 }
+            }
+            if (activity instanceof SummaryActivity) {
+                ((SummaryActivity) activity).getSubactivities().checkDependencies();
             }
         }
     }
