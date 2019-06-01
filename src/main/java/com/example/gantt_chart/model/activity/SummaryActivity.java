@@ -2,6 +2,7 @@ package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.exceptions.DatesException;
 import com.example.gantt_chart.exceptions.DependencyException;
+import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -38,6 +39,14 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
             if (activity instanceof SummaryActivity) {
                 ((SummaryActivity) activity).checkDateBounds();
             }
+        }
+    }
+
+    @Override
+    public void checkDependenciesIdExistence() throws IDException {
+        super.checkDependenciesIdExistence();
+        for (TerminalActivity activity : subactivities) {
+            activity.checkDependenciesIdExistence();
         }
     }
 
