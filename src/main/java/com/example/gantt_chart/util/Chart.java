@@ -40,16 +40,13 @@ public class Chart {
 
         chart.addSelectionChangeListener(selectionChangeEvent -> {
             Window window = Window.getInstance();
-            JPanel infoPanel = new JPanel();
-            infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-            ((JPanel) window.getRoot().getComponent(Window.INFO_PANEL)).add(infoPanel);
+            System.out.println(selectionChangeEvent.getSelection().getName());
             ExecutorList executorList = executorsMap.get(selectionChangeEvent.getSelection().getName());
             StringBuilder executors = new StringBuilder();
             for (Executor e : executorList) {
                 executors.append(e.getName() + " " + e.getSurname() + "; ");
             }
-            Label label = new Label("Executors: " + executors.toString());
-            infoPanel.add(label);
+            ((JLabel)((JPanel)((JPanel)window.getRoot().getComponent(Window.INFO_PANEL)).getComponent(0)).getComponent(0)).setText("Executors: " + executors.toString());
             window.getRoot().invalidate();
             window.getRoot().validate();
             window.getRoot().repaint();

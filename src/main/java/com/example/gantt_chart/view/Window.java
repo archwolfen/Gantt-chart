@@ -33,6 +33,10 @@ public class Window {
         JPanel executorInfoPanel = new JPanel();
         executorInfoPanel.setLayout(new BorderLayout());
         frame.getContentPane().add(executorInfoPanel, BorderLayout.SOUTH, INFO_PANEL);
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+        executorInfoPanel.add(infoPanel);
+        infoPanel.add(new JLabel());
 
         frame.setPreferredSize(new Dimension(800, 600));
         frame.setLocationRelativeTo(null);
