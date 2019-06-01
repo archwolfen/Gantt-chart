@@ -13,8 +13,7 @@ public class NodesArrayList extends ArrayList<Node> {
 
     public NodesArrayList(NodeList nodeList) {
 
-        for(int i = 0; i < nodeList.getLength(); i++)
-        {
+        for (int i = 0; i < nodeList.getLength(); i++) {
             add(nodeList.item(i));
         }
 
@@ -25,9 +24,8 @@ public class NodesArrayList extends ArrayList<Node> {
 
         NodesArrayList newList = new NodesArrayList();
 
-        for(Node currNode : this)
-        {
-            if (((Node)currNode).getNodeType() == Node.ELEMENT_NODE) {
+        for (Node currNode : this) {
+            if (((Node) currNode).getNodeType() == Node.ELEMENT_NODE) {
                 newList.add(currNode);
             }
         }
@@ -38,10 +36,8 @@ public class NodesArrayList extends ArrayList<Node> {
 
     // return index of node with name "elem", in case this node does not exists return -1
 
-    public int indexOfElement(String elem)
-    {
-        for (Node currNode : this)
-        {
+    public int indexOfElement(String elem) {
+        for (Node currNode : this) {
             if (currNode.getNodeName().equals(elem)) {
                 return super.indexOf(currNode);
             }
@@ -50,10 +46,8 @@ public class NodesArrayList extends ArrayList<Node> {
         return -1;
     }
 
-    public boolean hasElement(String elem)
-    {
-        for (Node currNode : this)
-        {
+    public boolean hasElement(String elem) {
+        for (Node currNode : this) {
             if (currNode.getNodeName().equals(elem)) {
                 return true;
             }

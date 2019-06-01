@@ -4,7 +4,9 @@ import com.example.gantt_chart.exceptions.DatesException;
 import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.ActivityList;
 import com.example.gantt_chart.model.activity.*;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import javax.naming.InvalidNameException;
@@ -29,6 +31,8 @@ public class Parser {
     }
 
     public ActivityList parse() throws Exception {
+        //clear previous parsing data
+        ID.clear();
 
         ActivityList taskList = new ActivityList();
 
@@ -67,30 +71,24 @@ public class Parser {
         task.setId(new ID(activityId, task));
 
         for (Node currData : dataList) {
-            if (currData.getNodeName().equals("date")) {
-
-                task.setStartFinal(getDates(currData));
-
-            } else if (currData.getNodeName().equals("executors")) {
-
-                task.setExecutors(getExecutorList(currData));
-
-            } else if (currData.getNodeName().equals("progress")) {
-
-                task.setProgress(getProgress(currData));
-
-            } else if (currData.getNodeName().equals("dependencies")) {
-
-                task.setDependencies(getIdList(currData));
-
-            } else if (currData.getNodeName().equals("sub-activities")) {
-
-                ((SummaryActivity) task).addSubActivities(getSubActivities(currData));
-
-            } else {
-
-                throw new InvalidNameException("Unexpected node name: " + currData.getNodeName());
-
+            switch (currData.getNodeName()) {
+                case "date":
+                    task.setStartFinal(getDates(currData));
+                    break;
+                case "executors":
+                    task.setExecutors(getExecutorList(currData));
+                    break;
+                case "progress":
+                    task.setProgress(getProgress(currData));
+                    break;
+                case "dependencies":
+                    task.setDependencies(getIdList(currData));
+                    break;
+                case "sub-activities":
+                    ((SummaryActivity) task).addSubActivities(getSubActivities(currData));
+                    break;
+                default:
+                    throw new InvalidNameException("Unexpected node name: " + currData.getNodeName());
             }
         }
 

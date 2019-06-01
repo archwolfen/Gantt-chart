@@ -1,10 +1,8 @@
 package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.exceptions.IDException;
-import com.example.gantt_chart.model.ActivityList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ID {
     private static ArrayList<ID> idList = new ArrayList<ID>();

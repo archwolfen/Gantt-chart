@@ -24,7 +24,7 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
     }
 
     public boolean checkDateBounds() {
-        for(TerminalActivity activity : subactivities) {
+        for (TerminalActivity activity : subactivities) {
             if (activity.getStartFinal().getStart().compareTo(getStartFinal().getStart()) < 0)
                 return false;
 
