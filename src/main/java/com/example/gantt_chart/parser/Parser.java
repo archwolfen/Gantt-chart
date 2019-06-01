@@ -45,17 +45,9 @@ public class Parser {
         }
 
         taskList.checkDependencies();
-        for (TerminalActivity a : taskList) {
-            if (a.getDependencies() != null)
-                a.getDependencies().checkCorrectionID();
-            if (a instanceof SummaryActivity) {
-                ((SummaryActivity) a).getSubactivities().checkDependencies();
-                ((SummaryActivity) a).checkDateBounds();
-
-            }
-            a.checkDependenciesBounds();
-        }
-
+        taskList.checkDependenciesBounds();
+        taskList.checkDependenciesIdExistence();
+        taskList.checkDateBounds();
         taskList.sort();
 
         return taskList;
