@@ -43,6 +43,12 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
     }
 
     @Override
+    public void checkDependencies(IDList poolIds) throws DependencyException {
+        super.checkDependencies(poolIds);
+        subactivities.checkDependencies();
+    }
+
+    @Override
     public void checkDependenciesIdExistence() throws IDException {
         super.checkDependenciesIdExistence();
         subactivities.checkDependenciesIdExistence();
