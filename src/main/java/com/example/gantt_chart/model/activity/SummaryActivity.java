@@ -1,6 +1,7 @@
 package com.example.gantt_chart.model.activity;
 
 import com.example.gantt_chart.exceptions.DatesException;
+import com.example.gantt_chart.exceptions.DependencyException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -32,6 +33,12 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
             if (activity.getStartFinal().getEnd().compareTo(getStartFinal().getEnd()) > 0)
                 throw new DatesException("Sub-activity can't end later than its summary activity");
         }
+    }
+
+    @Override
+    public void checkDependenciesBounds() throws DependencyException {
+        super.checkDependenciesBounds();
+        subactivities.checkDependencies();
     }
 
     public SubActivities getSubactivities() {
