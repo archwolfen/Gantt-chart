@@ -81,8 +81,9 @@ public class TerminalActivity implements Convertible {
     public void checkDependenciesBounds() throws DependencyException {
         if (dependencies != null) {
             for (String id : dependencies) {
-                if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) >= 0)
+                if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) >= 0) {
                     throw new DependencyException("Start date of dependent activity can`t merge with end date of activity that had to be done before this!");
+                }
             }
         }
     }
