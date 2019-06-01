@@ -18,7 +18,7 @@ public class CriticalPath implements Convertible {
         try {
             duration = new Dates(0, Long.MAX_VALUE);
         } catch (DatesException e) {
-            e.printStackTrace();
+            //Exception couldn't be thrown because date is already correct
         }
     }
 
@@ -35,32 +35,34 @@ public class CriticalPath implements Convertible {
             duration.setStart(first.getStartFinal().getStart());
             duration.setEnd(last.getStartFinal().getEnd());
         } catch (DatesException e) {
-            e.printStackTrace();
+            //Exception couldn't be thrown because date is already correct
         }
         //Calculate also subactivites, if they present
         for (IDList list : criticalPath) {
             for (int i = 0; i < list.size(); ++i) {
+                String currId = list.get(i);
                 //Skip id if it has been already checked
-                if (checkedIds.contains(list.get(i))) {
+                if (checkedIds.contains(currId)) {
                     continue;
                 }
-                TerminalActivity activity = ID.getActivityByID(list.get(i));
+                TerminalActivity activity = ID.getActivityByID(currId);
                 if (activity instanceof SummaryActivity) {
                     ArrayList<IDList> subCritical = calcCriticalPath(
                             ((SummaryActivity) activity).getSubactivities()
                     );
                     IDList tmpCopy = new IDList();
-                    list.addAll(i + 1, subCritical.get(0));
+                    list.addAll(i, subCritical.get(0));
                     //If subcritical path is not only one
                     for (int j = 1; j < subCritical.size(); ++j) {
                         IDList copyList = new IDList();
                         copyList.addAll(tmpCopy);
-                        copyList.addAll(i + 1, subCritical.get(j));
-
+                        copyList.addAll(i, subCritical.get(j));
                         criticalPath.add(copyList);
                     }
+                    //For check subactivities id
+                    --i;
                 }
-                checkedIds.add(list.get(i));
+                checkedIds.add(currId);
             }
         }
         //Reverse the order
