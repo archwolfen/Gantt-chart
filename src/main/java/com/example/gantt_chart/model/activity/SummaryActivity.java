@@ -45,9 +45,7 @@ public class SummaryActivity extends TerminalActivity implements Convertible {
     @Override
     public void checkDependenciesIdExistence() throws IDException {
         super.checkDependenciesIdExistence();
-        for (TerminalActivity activity : subactivities) {
-            activity.checkDependenciesIdExistence();
-        }
+        subactivities.checkDependenciesIdExistence();
     }
 
     @Override

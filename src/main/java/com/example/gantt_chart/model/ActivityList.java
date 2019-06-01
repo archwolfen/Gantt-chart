@@ -1,9 +1,7 @@
 package com.example.gantt_chart.model;
 
-import com.example.gantt_chart.exceptions.DatesException;
 import com.example.gantt_chart.model.activity.SubActivities;
 import com.example.gantt_chart.model.activity.SummaryActivity;
-import com.example.gantt_chart.model.activity.TerminalActivity;
 import com.google.gson.JsonElement;
 
 public class ActivityList extends SubActivities {
@@ -17,14 +15,6 @@ public class ActivityList extends SubActivities {
         });
 
         super.sort();
-    }
-
-    public void checkDateBounds() throws DatesException {
-        for (TerminalActivity activity : this) {
-            if (activity instanceof SummaryActivity) {
-                ((SummaryActivity) activity).checkDateBounds();
-            }
-        }
     }
 
     @Override

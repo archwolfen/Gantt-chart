@@ -1,6 +1,8 @@
 package com.example.gantt_chart.model.activity;
 
+import com.example.gantt_chart.exceptions.DatesException;
 import com.example.gantt_chart.exceptions.DependencyException;
+import com.example.gantt_chart.exceptions.IDException;
 import com.example.gantt_chart.model.Convertible;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -51,9 +53,23 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
         }
     }
 
+    public void checkDateBounds() throws DatesException {
+        for (TerminalActivity activity : this) {
+            if (activity instanceof SummaryActivity) {
+                ((SummaryActivity) activity).checkDateBounds();
+            }
+        }
+    }
+
     public void checkDependenciesBounds() throws DependencyException {
         for (TerminalActivity activity : this) {
             activity.checkDependenciesBounds();
+        }
+    }
+
+    public void checkDependenciesIdExistence() throws IDException {
+        for (TerminalActivity activity : this) {
+            activity.checkDependenciesIdExistence();
         }
     }
 
