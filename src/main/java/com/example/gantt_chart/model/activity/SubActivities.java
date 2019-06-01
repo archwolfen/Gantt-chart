@@ -65,6 +65,11 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
     }
 
     public void sort() {
+        for (TerminalActivity activity : this) {
+            if (activity instanceof SummaryActivity) {
+                ((SummaryActivity) activity).getSubactivities().sort();
+            }
+        }
         Collections.sort(this, (o1, o2) -> (int) (o1.getStartFinal().getStart().compareTo(o2.getStartFinal().getStart())));
     }
 
