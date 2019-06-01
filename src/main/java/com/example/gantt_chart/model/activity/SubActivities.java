@@ -7,6 +7,8 @@ import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class SubActivities extends ArrayList<TerminalActivity> implements Convertible {
@@ -37,11 +39,19 @@ public class SubActivities extends ArrayList<TerminalActivity> implements Conver
     }
 
     public void checkDependencies() throws DependencyException {
-        for (TerminalActivity activity : this)
-            if (activity.getDependencies() != null)
-                for (String id : activity.getDependencies())
-                    if (idsPool.indexOf(id) == -1)
+        for (TerminalActivity activity : this) {
+            if (activity.getDependencies() != null) {
+                for (String id : activity.getDependencies()) {
+                    if (idsPool.indexOf(id) == -1) {
                         throw new DependencyException("Subactivity of current activity can`t have previous activity as one of previous activity from the path!");
+                    }
+                }
+            }
+        }
+    }
+
+    public void sort() {
+        Collections.sort(this, (o1, o2) -> (int) (o1.getStartFinal().getStart().compareTo(o2.getStartFinal().getStart())));
     }
 
     public JsonElement toJson() {
