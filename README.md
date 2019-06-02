@@ -41,5 +41,3 @@ To see how to set XML file see [XML examples](docs/ExamplesXML.md)
 ![screenshot1](docs/screenshots/1.png)
 
 ![screenshot2](docs/screenshots/2.png)
-
-![screenshot2](docs/screenshots/3.png)
