@@ -92,7 +92,7 @@ public class TerminalActivity implements Convertible {
         if (dependencies != null) {
             for (String id : dependencies) {
                 if (ID.getActivityByID(id).getStartFinal().getEnd().compareTo(getStartFinal().getStart()) >= 0) {
-                    throw new DependencyException(String.format("Finish date of activity [%s] has to go before start date of activity[%s}", ID.getActivityByID(id).getTitle(), getTitle()));
+                    throw new DependencyException(String.format("Finish date of activity [%s] has to go after start date of activity[%s}", ID.getActivityByID(id).getTitle(), getTitle()));
                 }
             }
         }
