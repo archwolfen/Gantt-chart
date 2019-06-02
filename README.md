@@ -35,9 +35,9 @@ Then critical path is calculated. If there more than one critical path, they all
 will be displayed. Finally, it is displayed on the screen.
 
 ## Getting started
-To build this project first add all files in `lib` folder to project as a library
-Then build project
-Now you can run project from class `com.example.gantt_chart.Main`
+To build this project first add all files in `lib` folder to project as a library.
+Then build project.
+Now you can run project from class `com.example.gantt_chart.Main`.
 
 ## Errors which is handled
 - A task can't depend on task from another sub-tasks
