@@ -40,7 +40,7 @@ Then build project.
 Now you can run project from class `com.example.gantt_chart.Main`.
 
 ## Errors which is handled
-- A task can't depend on task from another sub-tasks
+- A task can't depend on other`s task sub-tasks
 - A depended task can't go earlier than the previous task finishes
 - A task with the id from dependencies does not exist
 - Dates of sub-tasks go earlier or later than the date of this task 
