@@ -38,3 +38,6 @@ To see how to set XML file see [XML examples](docs/ExamplesXML.md)
 
 ## Screenshots
 
+![screenshot1](docs/screenshots/1.jpg)
+
+![screenshot2](docs/screenshots/2.jpg)

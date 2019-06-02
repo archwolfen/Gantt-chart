@@ -5,21 +5,19 @@ import com.example.gantt_chart.model.CriticalPath;
 import com.example.gantt_chart.model.activity.*;
 import com.example.gantt_chart.parser.Parser;
 import com.example.gantt_chart.util.Chart;
-import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.Time;
 import org.swiftgantt.model.Task;
-import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OpenFileActionListener implements ActionListener {
     @Override
@@ -54,7 +52,6 @@ public class OpenFileActionListener implements ActionListener {
                         JOptionPane.WARNING_MESSAGE);
             }
 
-            //TODO parse xml and add chart creation
             ((JScrollPane) window.getRoot().getComponent(Window.SCROLL_PANE)).setViewportView(chart.getChartView());
         } else {
             JOptionPane.showMessageDialog(window.getRoot(),
@@ -80,7 +77,12 @@ public class OpenFileActionListener implements ActionListener {
             Date acEnd = acDates.getEnd();
             task.setStart(new Time(Integer.parseInt(new SimpleDateFormat("yyyy").format(acStart)), Integer.parseInt(new SimpleDateFormat("MM").format(acStart)), Integer.parseInt(new SimpleDateFormat("dd").format(acStart))));
             task.setEnd(new Time(Integer.parseInt(new SimpleDateFormat("yyyy").format(acEnd)), Integer.parseInt(new SimpleDateFormat("MM").format(acEnd)), Integer.parseInt(new SimpleDateFormat("dd").format(acEnd))));
+
+
             task.setProgress((int) ((double) acDates.getDurationInDays() * ac.getProgress().getPercents() / 100.0));
+            task.calcProgressSteps();
+            task.calcTaskSteps();
+
             chart.addTask(task, ac.getExecutors());
 
             if (ac.getDependencies() != null) {
@@ -88,15 +90,18 @@ public class OpenFileActionListener implements ActionListener {
                     task.addPredecessor(taskMap.get(id));
                 }
             }
+
             taskMap.put(ac.getId(), task);
 
             if (parent != null) {
                 parent.add(task);
             }
 
+
             if (ac instanceof SummaryActivity) {
                 add(path, ((SummaryActivity) ac).getSubactivities(), list, chart, task);
             }
+
         }
     }
 }
